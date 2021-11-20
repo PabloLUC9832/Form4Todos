@@ -1,0 +1,5 @@
+mx\uv\modelo\Conexion.class
+mx\uv\modelo\usuario\Usuario.class
+mx\uv\modelo\usuario\Usuario_DAO_Imp.class
+mx\uv\App.class
+mx\uv\modelo\usuario\Usuario_DAO.class
