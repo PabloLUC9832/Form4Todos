@@ -144,38 +144,40 @@ public class Usuario_DAO_Imp implements Usuario_DAO {
 	}
 
 	@Override
-	public Usuario read(Usuario u) throws Exception {
-		
+	public String read(Usuario u)  {
+
+        String msj = "";
+
         Statement stm;
         ResultSet rs;
-        String password = u.getPassword();
-        String sql = "SELECT * FROM usuario WHERE password = '"+password+"'";		
-		//Usuario usuario = new Usuario();
-		Conexion cc = new Conexion();
+        
+        String sql = "SELECT * FROM usuario WHERE password = ?;";//'"+u.getPassword()+"'";
+        Usuario usuario = new Usuario();
+        Conexion cc= new Conexion();
 
         try(Connection con = cc.getConnection();){
-            System.out.println("AQUII");
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             while(rs.next()){
-                u.setNombre(rs.getString(1));
-                u.setUser(rs.getString(2));                
-                u.setPassword(rs.getString(3));                             
+                usuario.setNombre(rs.getString(1));
+                usuario.setUser(rs.getString(2));                
+                usuario.setPassword(rs.getString(3));                            
             }
-            System.out.println("EXITOOOOOOOOO");
+            System.out.println(usuario.toString());
+            //msj="Se ha iniciado sesión";
+            msj = usuario.toString();
             stm.close();
             rs.close();
             con.close();
-        }catch(SQLException e){
-            throw new Exception("ERROR EN READ, SQLEXCEPTION "+e.getMessage());
-        }catch(NullPointerException e){
-            throw new Exception("ERROR EN READ, NULLPointerEXCEPTION "+e.getMessage());
         }catch(Exception e){
-            throw new Exception("ERROR EN READ, EXCEPTION "+e.getMessage());
-        }		
+            //throw new Exception("ERROR EN READ, EXCEPTION "+e.getMessage());
+            msj="Error al iniciar sesion\n";
+            e.printStackTrace();
+        }        
 
 
-		return u;
+        return msj;
+
 	}
 
 

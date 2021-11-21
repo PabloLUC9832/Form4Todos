@@ -4,7 +4,6 @@ import static spark.Spark.*;
 
 import com.google.gson.*;
 
-import mx.uv.modelo.Conexion;
 //import mx.uv.db.DAO;
 import mx.uv.modelo.usuario.*;
 
@@ -14,16 +13,13 @@ import mx.uv.modelo.usuario.*;
  * Hello world!
  *
  */
-public class App 
-{
+public class App {
     private static Gson gson = new Gson();
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ){
         System.out.println( "Hello World!" );
-         
-        Conexion c = new Conexion();
-        c.getConnection();
+        //Conexion c = new Conexion();
+        //c.getConnection();
 
         options("/*", (request, response) -> {
 
@@ -46,31 +42,33 @@ public class App
             return null;
         });
 
-        post("/login", (req, res) -> {
+        post("/login",(req,res)->{
             String json = req.body();
-            Usuario u = gson.fromJson(json,Usuario.class);
-            //String user = "12345";
-
-            Usuario_DAO_Imp dao = new Usuario_DAO_Imp();
+            Usuario u = gson.fromJson(json, Usuario.class);
+            //String paass = u.getPassword();
+            //String pass =
+            Usuario_DAO_Imp usuario_DAO = new Usuario_DAO_Imp();
             JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("user", dao.read(u));
-            System.out.println("asdad");
+            //String  pass="";
+            respuesta.addProperty("status", usuario_DAO.read(u));
+            //respuesta.addProperty(, );
             return respuesta;
-
         });
-
-         post("/usuario", (req, res) -> {
+        
+        post("/registro", (req, res) -> {
             // Insertamos un nuevo usuario
             String json = req.body();
             Usuario u = gson.fromJson(json, Usuario.class);
+            //String id = UUID.randomUUID().toString();
+            //u.setId(id);
+            //usuarios.put(id, u);
 
-            Usuario_DAO_Imp dao = new Usuario_DAO_Imp();
+            Usuario_DAO_Imp usuario_DAO_Imp = new Usuario_DAO_Imp();
             JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("status", dao.read(u));
+            respuesta.addProperty("status", usuario_DAO_Imp.create(u));
+            //respuesta.addProperty("id", id);
             return respuesta;
-        });
-        
-        
+        });                
 
     }
 }

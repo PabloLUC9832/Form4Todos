@@ -14,6 +14,7 @@ public interface Usuario_DAO{
 	public String delete (Usuario usuario) ;
 	//INICIO DE SESION 
 	//public Usuario read(String password) throws Exception;
-    public Usuario read(Usuario u) throws Exception;
-
+    //public Usuario read(Usuario u) throws Exception;
+    public String read(Usuario u);
+	//public String read(String pass);
 }
