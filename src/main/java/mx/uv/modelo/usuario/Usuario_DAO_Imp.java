@@ -16,7 +16,6 @@ public class Usuario_DAO_Imp implements Usuario_DAO {
 
 	@Override
 	public String create(Usuario usuario) {
-		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement prestm = null;
 		String msj = "";

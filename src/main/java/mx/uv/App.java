@@ -4,6 +4,8 @@ import static spark.Spark.*;
 
 import com.google.gson.*;
 
+import mx.uv.modelo.cuestionario.Cuestionario;
+import mx.uv.modelo.cuestionario.CuestionarioDAO_Imp;
 //import mx.uv.db.DAO;
 import mx.uv.modelo.usuario.*;
 
@@ -68,7 +70,24 @@ public class App {
             respuesta.addProperty("status", usuario_DAO_Imp.create(u));
             //respuesta.addProperty("id", id);
             return respuesta;
-        });                
+        });      
+        
+        /////////////////////////////////
+        post("/crearFormulario", (req, res) -> {
+            // Insertamos un nuevo usuario
+            String json = req.body();
+            Cuestionario u = gson.fromJson(json, Cuestionario.class);
+            //String id = UUID.randomUUID().toString();
+            //u.setId(id);
+            //usuarios.put(id, u);
+
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status", dao.createVP(u));
+            //respuesta.addProperty("id", id);
+            System.out.println(u.toString());
+            return respuesta;
+        });        
 
     }
 }

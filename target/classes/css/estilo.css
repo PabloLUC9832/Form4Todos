@@ -67,3 +67,13 @@ pagina se aplica el tamaño de fuente
 	margin: 0px;
 }
 }
+
+body{
+    background: white;
+    color: #333;
+    text-align: center;
+    font-family: "Arial";
+    font-size: 16px;
+    margin:0;
+    padding:0px;
+}
