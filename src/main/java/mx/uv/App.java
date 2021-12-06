@@ -47,7 +47,14 @@ public class App {
             return respuesta;
         });
         
-
+        /*post("/crearCuestionario2", (req, res) -> {
+            String json = req.body();
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status", dao.create2(cuestionario));
+            return respuesta;
+        });*/
 
     }
 }
