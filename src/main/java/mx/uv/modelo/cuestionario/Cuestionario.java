@@ -2,42 +2,34 @@ package mx.uv.modelo.cuestionario;
 
 public class Cuestionario {
 
-	int id;
-    String nombreCuestionario;
-    String nombreAlumno;
-    String pregunta;
-    String respuesta;
+    private int id; 
+    String nombreCuestionario; 
+    private String alumno;
+    private String pregunta;
+    private String respuesta;
+    
+    //VistaProfesor
+    public Cuestionario(int id, String pregunta){
+        this.id=id;
+        this.pregunta=pregunta;
+    }
+    //VistaAlumno
+    public Cuestionario(String alumno, String respuesta){
+        this.alumno=alumno;
+        this.respuesta=respuesta;
+    }
 
-    public Cuestionario(){
-    	this.id=0;
-    	this.nombreAlumno="";
-    	this.pregunta="";
-    	this.respuesta="";
-    }
-    //CONSTRUCTOR NOMBRE DEL CUESTIONARI
-    //CONSTRUCTOR VISTA MAESTRO
-    public Cuestionario(int id,String pregunta){
-    	this.id=0;
-    	//this.nombreAlumno="";
-    	this.pregunta="";
-    	//this.respuesta="";
-    }
-    //CONSTRUCTOR VISTA ALUMNO
-    public Cuestionario(String nombreAlumno,String respuesta){
-    	this.nombreAlumno="";
-    	this.respuesta="";
-    }
     public int getId() {
         return id;
     }
     public void setId(int id) {
         this.id = id;
     }
-    public String getNombreAlumno() {
-        return nombreAlumno;
+    public String getAlumno() {
+        return alumno;
     }
-    public void setNombreAlumno(String nombreAlumno) {
-        this.nombreAlumno = nombreAlumno;
+    public void setAlumno(String alumno) {
+        this.alumno = alumno;
     }
     public String getPregunta() {
         return pregunta;
@@ -51,18 +43,19 @@ public class Cuestionario {
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
-
+    
     public String getNombreCuestionario() {
         return nombreCuestionario;
     }
     public void setNombreCuestionario(String nombreCuestionario) {
         this.nombreCuestionario = nombreCuestionario;
     }
+    @Override
+    public String toString() {
+        return "Cuestionario [alumno=" + alumno + ", id=" + id + ", pregunta=" + pregunta + ", respuesta=" + respuesta
+                + "]";
+    }
 
     
-
-
-    
-
     
 }

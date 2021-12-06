@@ -6,10 +6,6 @@ import com.google.gson.*;
 
 import mx.uv.modelo.cuestionario.Cuestionario;
 import mx.uv.modelo.cuestionario.CuestionarioDAO_Imp;
-//import mx.uv.db.DAO;
-import mx.uv.modelo.usuario.*;
-
-
 
 /**
  * Hello world!
@@ -20,8 +16,6 @@ public class App {
 
     public static void main( String[] args ){
         System.out.println( "Hello World!" );
-        //Conexion c = new Conexion();
-        //c.getConnection();
 
         options("/*", (request, response) -> {
 
@@ -42,52 +36,18 @@ public class App {
 
         get("/", (req, res) -> {
             return null;
-        });
-
-        post("/login",(req,res)->{
+        });        
+               
+        post("/crearCuestionario", (req, res) -> {
             String json = req.body();
-            Usuario u = gson.fromJson(json, Usuario.class);
-            //String paass = u.getPassword();
-            //String pass =
-            Usuario_DAO_Imp usuario_DAO = new Usuario_DAO_Imp();
-            JsonObject respuesta = new JsonObject();
-            //String  pass="";
-            respuesta.addProperty("status", usuario_DAO.read(u));
-            //respuesta.addProperty(, );
-            return respuesta;
-        });
-        
-        post("/registro", (req, res) -> {
-            // Insertamos un nuevo usuario
-            String json = req.body();
-            Usuario u = gson.fromJson(json, Usuario.class);
-            //String id = UUID.randomUUID().toString();
-            //u.setId(id);
-            //usuarios.put(id, u);
-
-            Usuario_DAO_Imp usuario_DAO_Imp = new Usuario_DAO_Imp();
-            JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("status", usuario_DAO_Imp.create(u));
-            //respuesta.addProperty("id", id);
-            return respuesta;
-        });      
-        
-        /////////////////////////////////
-        post("/crearFormulario", (req, res) -> {
-            // Insertamos un nuevo usuario
-            String json = req.body();
-            Cuestionario u = gson.fromJson(json, Cuestionario.class);
-            //String id = UUID.randomUUID().toString();
-            //u.setId(id);
-            //usuarios.put(id, u);
-
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("status", dao.createVP(u));
-            //respuesta.addProperty("id", id);
-            System.out.println(u.toString());
+            respuesta.addProperty("status", dao.create(cuestionario));
             return respuesta;
-        });        
+        });
+        
+
 
     }
 }
