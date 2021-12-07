@@ -6,25 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+	<link rel="stylesheet" href="\src\main\resources\css\estilosPopup.css">
 </head>
 
 <body>
     <form action="">
+        <h1>Vista Profesor</h1>
+        <br>
+        <h2>Crear Cuestionario</h2>
+        <br>
         <input type="text" name="" id="nombreCuestionario" placeholder="Ingresa el nombre del cuestionario">
         <button type="button" id="btnCrearCuestionario">Crear cuestionario</button>
-        <br><br>
-        <button type="button" id="btnPreguntas">Añadir pregunta</button>
-        <br><br>
-        <input type="text" name="" id="pregunta1" placeholder="Ingresa la pregunta">
-        <!--<input type="text" name="" id="pregunta2" placeholder="Ingresa la pregunta">
-        <input type="text" name="" id="pregunta3" placeholder="Ingresa la pregunta">
-        <input type="text" name="" id="pregunta4" placeholder="Ingresa la pregunta">
-        <input type="text" name="" id="pregunta5" placeholder="Ingresa la pregunta">
-        <input type="text" name="" id="pregunta6" placeholder="Ingresa la pregunta"> -->                                     
+        <br>
+                               
     </form>
+
+    <br>
+    <h2>Añadir Preguntas</h2>
+    <br>
+    <button id="btn-abrir-popup" class="btn-abrir-popup">Añadir pregunta</button>
+
+    <div class="overlay" id="overlay">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            <h3>Ingresa los datos que se piden a continuación</h3>
+            
+            <form action="">
+                <div class="contenedor-inputs">
+                    <input type="text" name="" id="nombreCuestionarioExistente" placeholder="Ingresa el nombre del cuestionario">
+                    <input type="text" name="" id="pregunta1" placeholder="Ingresa la pregunta">
+                </div>
+                <button type="button" class="btn-submit" id="btnPreguntas">Añadir pregunta</button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/src/main/resources/js/crearCuestionario.js"></script>
+    <script src="/src/main/resources/js/popup.js"></script>
+    
 </body>
 
 </html>

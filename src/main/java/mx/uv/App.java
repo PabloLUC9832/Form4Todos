@@ -43,18 +43,18 @@ public class App {
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("status", dao.create(cuestionario));
+            respuesta.addProperty("status", dao.createCuestionario(cuestionario));
             return respuesta;
         });
         
-        /*post("/crearCuestionario2", (req, res) -> {
+        post("/crearPregunta", (req, res) -> {
             String json = req.body();
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("status", dao.create2(cuestionario));
+            respuesta.addProperty("status", dao.createPregunta(cuestionario));
             return respuesta;
-        });*/
+        });
 
     }
 }
