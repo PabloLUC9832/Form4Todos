@@ -56,5 +56,11 @@ public class App {
             return respuesta;
         });
 
+        get("/listaPreguntas", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            return gson.toJson(dao.listaPreguntas());
+        });
+
     }
 }

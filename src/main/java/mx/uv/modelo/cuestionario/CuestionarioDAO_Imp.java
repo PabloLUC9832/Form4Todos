@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CuestionarioDAO_Imp {
@@ -147,5 +150,50 @@ public class CuestionarioDAO_Imp {
         return msj;        
 
     }*/
+
+    public List<Cuestionario> listaPreguntas() {
+        Statement stm = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        List<Cuestionario> resultado = new ArrayList<>(); 
+
+        conn = conexion.getConnection();
+        try {
+            String sql = "SELECT * FROM examen1";
+            stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()){
+                //Cuestionario u = new Cuestionario(rs.getInt("id"), rs.getString("alumno"), rs.getString("pregunta"),rs.getString("respuesta"));
+                Cuestionario u = new Cuestionario(rs.getInt("id"), rs.getString("pregunta"));
+                resultado.add(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (stm != null){
+                try {
+                    stm.close();
+                } catch (SQLException e) {
+                    stm = null;
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    rs = null;
+                    e.printStackTrace();
+                }
+            }
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultado;
+    }
+
 
 }
