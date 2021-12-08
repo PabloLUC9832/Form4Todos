@@ -195,5 +195,44 @@ public class CuestionarioDAO_Imp {
         return resultado;
     }
 
+    public String modificarRespuesta(Cuestionario cuestionario){
+
+        Connection conn = null;
+        PreparedStatement prestm = null;
+        String msj = "";
+
+        conn = conexion.getConnection();
+        String nombreCuestionario = cuestionario.getNombreCuestionario();      
+        try {
+            String sql = "UPDATE examen1 SET alumno = ? , respuesta = ? WHERE id = ?;";
+            //String sql = "UPDATE "+nombreCuestionario+" SET alumno = ? , respuesta = ? WHERE id = ?;";
+            prestm = conn.prepareStatement(sql);            
+            prestm.setString(1, cuestionario.getAlumno());            
+            prestm.setString(2, cuestionario.getRespuesta());                        
+            prestm.setInt(3,cuestionario.getId());            
+            if (prestm.executeUpdate() >0) 
+                msj = "Respuesta guardada";
+            else
+                msj = "Error al guardar respuesta";         
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (prestm != null){
+                try {
+                    prestm.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return msj;        
+        
+    }
+
 
 }

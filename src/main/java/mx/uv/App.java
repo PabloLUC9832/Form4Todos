@@ -62,5 +62,20 @@ public class App {
             return gson.toJson(dao.listaPreguntas());
         });
 
+        post("/guardarRespuesta", (req, res) -> {
+            // Insertamos un nuevo usuario
+            String json = req.body();
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            //String id = UUID.randomUUID().toString();
+            //u.setId(id);
+            //usuarios.put(id, u);
+
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status", dao.modificarRespuesta(cuestionario));
+            //respuesta.addProperty("id", id);
+            return respuesta;
+        });
+
     }
 }
