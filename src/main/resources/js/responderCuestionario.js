@@ -44,12 +44,13 @@ btnVer.addEventListener("click", function () {
                 //let pregunta = document.createElement("label")
                 ///tarea.textContent = clave + " " + json[clave].id;
                 idyPr.textContent = ""+ json[clave].id+"\n"+json[clave].pregunta;
+                //var a = res.textContent = ""+ json[clave].respuesta;
                 res.textContent = ""+ json[clave].respuesta;
                 btnEnviar.textContent = "Enviar respuesta";
-                /*btnEnviar.addEventListener("click",() => {
+                btnEnviar.addEventListener("click",() => {
                     axios.post("http://localhost:4567/guardarRespuesta",{
                         alumno : document.getElementById("alumno").value ,
-                        respuesta : resp 
+                        respuesta : resp.value 
                     })
                     .then(function(res){
                         //alert("Usuario:" + res.data.status + " id:" + res.data.id);
@@ -58,12 +59,12 @@ btnVer.addEventListener("click", function () {
                     .catch(function (error) {
                         console.log(error)
                     })
-                })*/
-                btnEnviar.onclick = function(){
+                })
+                //btnEnviar.onclick = function(){
                     //console.log("hola")
-                    //console.log(idyPr)
+                    //console.log(resp.value)
                     //UPDATE ¿?
-                    axios.post("http://localhost:4567/guardarRespuesta",{
+                    /*axios.post("http://localhost:4567/guardarRespuesta",{
                         alumno : document.getElementById("alumno").value ,
                         respuesta : resp 
                     })
@@ -73,8 +74,9 @@ btnVer.addEventListener("click", function () {
                     })
                     .catch(function (error) {
                         console.log(error)
-                    })
-                }
+                    })*/
+                    //enviarResp(a)
+                //}
                 listaTareas.appendChild(idyPr);
                 listaTareas.appendChild(resp);
                 listaTareas.appendChild(btnEnviar);
@@ -103,3 +105,17 @@ btnEnviar.addEventListener("click",(alum,respuest)=>{
     })
 })
 */
+
+/*function enviarResp(respu){
+    axios.post("http://localhost:4567/guardarRespuesta",{
+                        alumno : document.getElementById("alumno").value ,
+                        respuesta : respu 
+                    })
+                    .then(function(res){
+                        //alert("Usuario:" + res.data.status + " id:" + res.data.id);
+                        alert("Status: "+ res.data.status);
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+}*/
