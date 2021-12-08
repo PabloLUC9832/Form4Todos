@@ -37,18 +37,25 @@ btnVer.addEventListener("click", function () {
                 // alert("La clave es " + clave + " y el valor es " + json[clave]);
                 //let tarea = document.createElement("button");
                 //idyPr = ID de la pregunta y la descripció de la pregunta
-                let idyPr = document.createElement("label");
+                //let idyPr = document.createElement("label");
+                let id = document.createElement("label");
+                let Pr = document.createElement("label");
                 let resp = document.createElement("input");
                 let salto = document.createElement("br");
                 let btnEnviar = document.createElement("button");
                 //let pregunta = document.createElement("label")
                 ///tarea.textContent = clave + " " + json[clave].id;
-                idyPr.textContent = ""+ json[clave].id+"\n"+json[clave].pregunta;
+                //idyPr.textContent = ""+ json[clave].id+"\n"+json[clave].pregunta;
+                id.textContent = json[clave].id;
+                Pr.textContent = json[clave].pregunta;
+
                 //var a = res.textContent = ""+ json[clave].respuesta;
                 res.textContent = ""+ json[clave].respuesta;
                 btnEnviar.textContent = "Enviar respuesta";
                 btnEnviar.addEventListener("click",() => {
+                    console.log(id.innerText)
                     axios.post("http://localhost:4567/guardarRespuesta",{
+                        id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
                         respuesta : resp.value 
                     })
@@ -77,7 +84,8 @@ btnVer.addEventListener("click", function () {
                     })*/
                     //enviarResp(a)
                 //}
-                listaTareas.appendChild(idyPr);
+                listaTareas.appendChild(id);
+                listaTareas.appendChild(Pr);
                 listaTareas.appendChild(resp);
                 listaTareas.appendChild(btnEnviar);
                 listaTareas.appendChild(salto);
