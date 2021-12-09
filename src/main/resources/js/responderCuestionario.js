@@ -30,6 +30,7 @@ btnVer.addEventListener("click", function () {
     .then(function (res) {
         let json = res.data;
         let listaTareas = document.getElementById("preguntas");
+        let btnEnviar = document.createElement("button");
         for (var clave in json) {
             // Controlando que json realmente tenga esa propiedad
             if (json.hasOwnProperty(clave)) {
@@ -41,8 +42,10 @@ btnVer.addEventListener("click", function () {
                 let id = document.createElement("label");
                 let Pr = document.createElement("label");
                 let resp = document.createElement("input");
+                var a =  "respuesta"+clave
+                resp.setAttribute("id",a)
                 let salto = document.createElement("br");
-                let btnEnviar = document.createElement("button");
+                
                 //let pregunta = document.createElement("label")
                 ///tarea.textContent = clave + " " + json[clave].id;
                 //idyPr.textContent = ""+ json[clave].id+"\n"+json[clave].pregunta;
@@ -58,6 +61,8 @@ btnVer.addEventListener("click", function () {
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
                         respuesta : resp.value 
+                        //respuesta : document.getElementById(a1).value,
+                        //respuesta : document.getElementById(a2).value, 
                     })
                     .then(function(res){
                         //alert("Usuario:" + res.data.status + " id:" + res.data.id);

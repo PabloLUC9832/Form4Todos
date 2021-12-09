@@ -17,7 +17,7 @@ btnCerrarPopup.addEventListener('click', function(e){
 btnPreguntas.addEventListener("click", () => {
     axios.post("http://localhost:4567/crearPregunta", {
         nombreCuestionario : document.getElementById("nombreCuestionarioExistente").value,
-        id : 11,
+        id : 6,
         alummo:"",
         pregunta: document.getElementById("pregunta1").value,
         respuesta:"",
