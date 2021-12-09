@@ -58,9 +58,10 @@ public class CuestionarioDAO_Imp {
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
 
-            String sql0 = "SELECT 1 FROM " +nombreCuestionario+" LIMIT 1";
-            String sql2 = "INSERT INTO "+nombreCuestionario+" (id,alumno,pregunta,respuesta) VALUES (?,?,?,?)";
-
+            String sql0 = "SELECT 1 FROM `" +nombreCuestionario+"` LIMIT 1";
+            //String sql2 = "INSERT INTO `"+nombreCuestionario+"` (id,alumno,pregunta,respuesta) VALUES (?,?,?,?)";
+            String sql2 = "INSERT INTO `"+nombreCuestionario+"` (`id`, `alumno`, `pregunta`, `respuesta`) VALUES (?,?,?,?)";
+            System.out.println("NOMBRE ccc "+nombreCuestionario);
             prestm0 = conn.prepareStatement(sql0);
             prestm2 = conn.prepareStatement(sql2);
 
