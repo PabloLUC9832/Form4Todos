@@ -1,30 +1,102 @@
 var btnEnviarCuestionario = document.getElementById("btnEnviarCuestionario");
 var btnVer = document.getElementById("btnVer");
 
-/*
-let resultados ='';
-const contenedor = document.querySelector('tbody');
-const pregunta = document.getElementById("pregunta");
-const respuesta = document.getElementById("respuesta");
-const nombreCuestionario = document.getElementById("nombreCuestionario");
-const alumno = document.getElementById("alumno");
+var chunks = [];
+var mediaRecorder;
 
-//mostrar
-function mostrarTabla(){
-    const mostrar = (preguntas) => {
-        preguntas.forEach(pregunt => {
-            resultados += `<tr>
-                                 <td>${pregunt.id}</td>
-                                 <td>${pregunt.alumno}</td>
-                                <td>${pregunt.pregunta}</td>
-                                <td>${pregunt.respuesta}</td>
-                            </tr>
-                        `
-        })
-        contenedor.innerHTML = resultados
+navigator.mediaDevices.getUserMedia({
+  audio: true, video: true
+}).then(function (x) {
+  // usar el flujo de datos 
+  console.log(x)
+  mediaRecorder = new MediaRecorder(x);
+
+  var camara = document.getElementById("camara")
+  camara.srcObject = x
+  camara.onloadedmetadata = function (e) {
+    // Do something with the video here.
+    camara.play()
+  };
+  console.log(camara)
+
+  mediaRecorder.onstop = function (e) {
+    console.log("data available after MediaRecorder.stop() called.");
+
+    var clipName = prompt('Enter a name for your sound clip');
+
+    var clipContainer = document.createElement('article');
+    var clipLabel = document.createElement('p');
+    var audio = document.createElement('video');
+    audio.width="150"
+    var deleteButton = document.createElement('button');
+    // generar una liga
+    var a = document.createElement('a')
+    var texto = document.createTextNode("descarga")
+    a.appendChild(texto)
+
+    clipContainer.classList.add('clip');
+    audio.setAttribute('controls', '');
+    deleteButton.innerHTML = "Delete";
+    clipLabel.innerHTML = clipName;
+
+    var soundClips = document.getElementById("xxx")
+    clipContainer.appendChild(audio);
+    clipContainer.appendChild(clipLabel);
+    clipContainer.appendChild(deleteButton);
+    clipContainer.appendChild(a)
+    soundClips.appendChild(clipContainer);
+
+    audio.controls = true;
+    var blob = new Blob(chunks, { 'type': 'video/webm; codecs=vp8' });
+    chunks = [];
+    var audioURL = URL.createObjectURL(blob);
+    audio.src = audioURL;
+    console.log("recorder stopped");
+    a.href = audioURL
+    a.download = "video.mp4"
+
+    deleteButton.onclick = function(e) {
+      evtTgt = e.target;
+      evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
     }
+  }
+
+  mediaRecorder.ondataavailable = function(e) {
+    chunks.push(e.data);
+    enviar(e.data)
+  }
+
+  }).catch(function (err) {
+    // manejar el error 
+    console.log(err)
+  });
+
+function GRABAR() {
+  mediaRecorder.start();
+  console.log(mediaRecorder.state);
+  console.log("recorder started");
+  // record.style.background = "red";
+  // record.style.color = "black";
 }
-*/
+
+function DETENER() {
+  mediaRecorder.stop();
+  console.log(mediaRecorder.state);
+  console.log("recorder stopped");
+  // record.style.background = "";
+  // record.style.color = "";
+}
+
+function enviar(stream) {
+  var formData = new FormData();
+  formData.append("videoGrabado", stream)
+  axios.post("http://localhost:4567/", formData, {
+    headers : {
+      "Content-Type" : "multipart/form-data"
+    }
+  })
+}
+
 btnVer.addEventListener("click", function () {
     axios.get("http://localhost:4567/listaPreguntas")
     .then(function (res) {
@@ -32,28 +104,27 @@ btnVer.addEventListener("click", function () {
         let listaTareas = document.getElementById("preguntas");
         let btnEnviar = document.createElement("button");
         for (var clave in json) {
-            // Controlando que json realmente tenga esa propiedad
+            //var contadorDetener = "detener"+clave;
+            //var contadorGrabar = "grabar"+clave;
             if (json.hasOwnProperty(clave)) {
-                // Mostrando en pantalla la clave junto a su valor
-                // alert("La clave es " + clave + " y el valor es " + json[clave]);
-                //let tarea = document.createElement("button");
-                //idyPr = ID de la pregunta y la descripció de la pregunta
-                //let idyPr = document.createElement("label");
                 let id = document.createElement("label");
                 let Pr = document.createElement("label");
                 let resp = document.createElement("input");
+                let btnGrabar = document.createElement("button");
+                btnGrabar.setAttribute("type","button");
+                btnGrabar.addEventListener("click",GRABAR)
+                let btnDetener = document.createElement("button");
+                btnDetener.setAttribute("type","button");
+                btnDetener.addEventListener("click",DETENER)
                 var a =  "respuesta"+clave
                 resp.setAttribute("id",a)
                 let salto = document.createElement("br");
-                
-                //let pregunta = document.createElement("label")
-                ///tarea.textContent = clave + " " + json[clave].id;
-                //idyPr.textContent = ""+ json[clave].id+"\n"+json[clave].pregunta;
                 id.textContent = json[clave].id;
                 Pr.textContent = json[clave].pregunta;
-
-                //var a = res.textContent = ""+ json[clave].respuesta;
                 res.textContent = ""+ json[clave].respuesta;
+                btnGrabar.textContent = "Grabar respuesta";
+                btnDetener.textContent = "Detener grabación";
+
                 btnEnviar.textContent = "Enviar respuesta";
                 btnEnviar.addEventListener("click",() => {
                     console.log(id.innerText)
@@ -61,74 +132,26 @@ btnVer.addEventListener("click", function () {
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
                         respuesta : resp.value 
-                        //respuesta : document.getElementById(a1).value,
-                        //respuesta : document.getElementById(a2).value, 
                     })
                     .then(function(res){
-                        //alert("Usuario:" + res.data.status + " id:" + res.data.id);
                         alert("Status: "+ res.data.status);
                     })
                     .catch(function (error) {
                         console.log(error)
                     })
                 })
-                //btnEnviar.onclick = function(){
-                    //console.log("hola")
-                    //console.log(resp.value)
-                    //UPDATE ¿?
-                    /*axios.post("http://localhost:4567/guardarRespuesta",{
-                        alumno : document.getElementById("alumno").value ,
-                        respuesta : resp 
-                    })
-                    .then(function(res){
-                        //alert("Usuario:" + res.data.status + " id:" + res.data.id);
-                        alert("Status: "+ res.data.status);
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })*/
-                    //enviarResp(a)
-                //}
                 listaTareas.appendChild(id);
                 listaTareas.appendChild(Pr);
                 listaTareas.appendChild(resp);
+                listaTareas.appendChild(btnGrabar);
+                listaTareas.appendChild(btnDetener);
                 listaTareas.appendChild(btnEnviar);
                 listaTareas.appendChild(salto);
                 
             }
-        }
-        //mostrarTabla()     
+        }   
     })
     .catch(function (error) {
         console.log(error)
     })
 })
-/*
-btnEnviar.addEventListener("click",(alum,respuest)=>{
-    axios.post("http://localhost:4567/guardarRespuesta",{
-        alumno : document.getElementById(alum).value ,
-        respuesta: document.getElementById(respuest).value        
-    })
-    .then(function(res){
-        //alert("Usuario:" + res.data.status + " id:" + res.data.id);
-        alert("Status: "+ res.data.status);
-    })
-    .catch(function (error) {
-        console.log(error)
-    })
-})
-*/
-
-/*function enviarResp(respu){
-    axios.post("http://localhost:4567/guardarRespuesta",{
-                        alumno : document.getElementById("alumno").value ,
-                        respuesta : respu 
-                    })
-                    .then(function(res){
-                        //alert("Usuario:" + res.data.status + " id:" + res.data.id);
-                        alert("Status: "+ res.data.status);
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })
-}*/

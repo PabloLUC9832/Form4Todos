@@ -160,7 +160,7 @@ public class CuestionarioDAO_Imp {
 
         conn = conexion.getConnection();
         try {
-            String sql = "SELECT * FROM servidores";
+            String sql = "SELECT * FROM `examen 1`";
             stm = conn.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()){
@@ -205,7 +205,7 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql = "UPDATE servidores SET alumno = ? , respuesta = ? WHERE id = ?;";
+            String sql = "UPDATE `examen 1` SET alumno = ? , respuesta = ? WHERE id = ?;";
             //String sql = "UPDATE "+nombreCuestionario+" SET alumno = ? , respuesta = ? WHERE id = ?;";
             prestm = conn.prepareStatement(sql);            
             prestm.setString(1, cuestionario.getAlumno());            
