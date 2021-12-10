@@ -24,7 +24,9 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();        
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql1 = "CREATE TABLE `proyectosw`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+            //String sql1 = "CREATE TABLE `proyectosw`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+
+            String sql1 = "CREATE TABLE `proyectosw`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL, `respuestaVideo` MEDIUMBLOB NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
             prestm = conn.prepareStatement(sql1);
             prestm.execute();
 
@@ -60,7 +62,7 @@ public class CuestionarioDAO_Imp {
 
             String sql0 = "SELECT 1 FROM `" +nombreCuestionario+"` LIMIT 1";
             //String sql2 = "INSERT INTO `"+nombreCuestionario+"` (id,alumno,pregunta,respuesta) VALUES (?,?,?,?)";
-            String sql2 = "INSERT INTO `"+nombreCuestionario+"` (`id`, `alumno`, `pregunta`, `respuesta`) VALUES (?,?,?,?)";
+            String sql2 = "INSERT INTO `"+nombreCuestionario+"` (`id`, `alumno`, `pregunta`, `respuesta`,`respuestaVideo`) VALUES (?,?,?,?,?)";
             System.out.println("NOMBRE ccc "+nombreCuestionario);
             prestm0 = conn.prepareStatement(sql0);
             prestm2 = conn.prepareStatement(sql2);
@@ -70,6 +72,7 @@ public class CuestionarioDAO_Imp {
                 prestm2.setString(2, cuestionario.getAlumno()); 
                 prestm2.setString(3, cuestionario.getPregunta()); 
                 prestm2.setString(4, cuestionario.getRespuesta());
+                prestm2.setBytes(5,cuestionario.getRespuestaVideo());
                 prestm2.executeUpdate();
                 System.out.println("Solo guardar");
             }
@@ -160,7 +163,7 @@ public class CuestionarioDAO_Imp {
 
         conn = conexion.getConnection();
         try {
-            String sql = "SELECT * FROM `examen 1`";
+            String sql = "SELECT * FROM `examen sistemas`";
             stm = conn.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()){
@@ -205,12 +208,14 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql = "UPDATE `examen 1` SET alumno = ? , respuesta = ? WHERE id = ?;";
+            String sql = "UPDATE `examen sistemas` SET alumno = ? , respuesta = ?, respuestaVideo= ? WHERE id = ?;";
             //String sql = "UPDATE "+nombreCuestionario+" SET alumno = ? , respuesta = ? WHERE id = ?;";
             prestm = conn.prepareStatement(sql);            
             prestm.setString(1, cuestionario.getAlumno());            
             prestm.setString(2, cuestionario.getRespuesta());                        
-            prestm.setInt(3,cuestionario.getId());            
+            prestm.setBytes(3,cuestionario.getRespuestaVideo());
+            prestm.setInt(4,cuestionario.getId());
+                        
             if (prestm.executeUpdate() >0) 
                 msj = "Respuesta guardada";
             else

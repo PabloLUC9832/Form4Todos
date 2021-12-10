@@ -7,7 +7,7 @@ import com.google.gson.*;
 import mx.uv.modelo.cuestionario.Cuestionario;
 import mx.uv.modelo.cuestionario.CuestionarioDAO_Imp;
 
-/**
+/*
  * Hello world!
  *
  */

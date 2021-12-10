@@ -1,5 +1,6 @@
 package mx.uv.modelo.cuestionario;
 
+
 public class Cuestionario {
 
     private int id; 
@@ -7,16 +8,22 @@ public class Cuestionario {
     private String alumno;
     private String pregunta;
     private String respuesta;
-    
+    private byte[] respuestaVideo;
     //VistaProfesor
     public Cuestionario(int id, String pregunta){
         this.id=id;
         this.pregunta=pregunta;
     }
-    //VistaAlumno
+    //VistaAlumno1
     public Cuestionario(String alumno, String respuesta){
         this.alumno=alumno;
         this.respuesta=respuesta;
+    }
+    //VistaAlumno2
+    public Cuestionario(String alumno, String respuesta,byte[] respuestaVideo){
+        this.alumno=alumno;
+        this.respuesta=respuesta;
+        this.respuestaVideo=respuestaVideo;
     }
 
     public int getId() {
@@ -49,6 +56,13 @@ public class Cuestionario {
     }
     public void setNombreCuestionario(String nombreCuestionario) {
         this.nombreCuestionario = nombreCuestionario;
+    }
+
+    public byte[] getRespuestaVideo() {
+        return respuestaVideo;
+    }
+    public void setRespuestaVideo(byte[] respuestaVideo) {
+        this.respuestaVideo = respuestaVideo;
     }
     @Override
     public String toString() {
