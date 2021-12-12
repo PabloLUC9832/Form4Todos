@@ -6,7 +6,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
 import java.nio.file.*;
-
+import spark.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.nio.file.*;
+import static spark.Spark.*;
+import static spark.debug.DebugScreen.*;
 import com.google.gson.*;
 
 import mx.uv.modelo.cuestionario.Cuestionario;
@@ -17,11 +23,12 @@ import mx.uv.modelo.cuestionario.CuestionarioDAO_Imp;
  *
  */
 public class App {
+
     private static Gson gson = new Gson();
 
-    public static void main( String[] args ){
-        System.out.println( "Hello World!" );
-        
+    public static void main(String[] args) {
+       // enableDebugScreen();
+
         File uploadDir = new File("upload");
         uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
@@ -41,15 +48,30 @@ public class App {
 
             return "OK";
         });
+
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
-        
         get("/", (req, res) ->
                   "<form method='post' enctype='multipart/form-data'>" // note the enctype
                 + "    <input type='file' name='videoGrabado' accept='.png'>" // make sure to call getPart using the same "name" in the post
                 + "    <button>Upload picture</button>"
                 + "</form>"
-        );       
-               
+        );
+
+        post("/", (req, res) -> {
+
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", ".mp4");
+
+            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            try (InputStream input = req.raw().getPart("videoGrabado").getInputStream()) { // getPart needs to use same "name" as input field in form
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            logInfo(req, tempFile);
+            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+
+        });
+
         post("/crearCuestionario", (req, res) -> {
             String json = req.body();
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
@@ -87,28 +109,13 @@ public class App {
             respuesta.addProperty("status", dao.modificarRespuesta(cuestionario));
             //respuesta.addProperty("id", id);
             return respuesta;
-        });
-
-        post("/", (req, res) -> {
-
-            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", ".mp4");
-
-            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-
-            try (InputStream input = req.raw().getPart("videoGrabado").getInputStream()) { // getPart needs to use same "name" as input field in form
-                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
-            }
-
-            logInfo(req, tempFile);
-            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
-
-        });
+        });        
 
     }
 
     // methods used for logging
     private static void logInfo(Request req, Path tempFile) throws IOException, ServletException {
-        System.out.println("Uploaded file '" + getFileName(req.raw().getPart("uploaded_file")) + "' saved as '" + tempFile.toAbsolutePath() + "'");
+        System.out.println("Uploaded file '" + getFileName(req.raw().getPart("videoGrabado")) + "' saved as '" + tempFile.toAbsolutePath() + "'");
     }
     
     private static String getFileName(Part part) {
@@ -119,5 +126,5 @@ public class App {
         }
         return null;
     }
-
+    
 }
