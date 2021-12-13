@@ -103,6 +103,12 @@ navigator.mediaDevices.getUserMedia({
         "Content-Type" : "multipart/form-data"
       }
     })
+    .then(function (res){
+      alert("Ruta: "+res.data.nombreVideo);
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   }
 
 btnVer.addEventListener("click", function () {
