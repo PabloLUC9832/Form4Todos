@@ -68,10 +68,17 @@ public class App {
             }
 
             logInfo(req, tempFile);
-            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+            //String nombreVideo = "/"+tempFile.getFileName();
+            //return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+            //System.out.println("nombreVideo: "+nombreVideo);                         
+            String  json = req.body();
+            String nombreVideo = "/"+tempFile.getFileName();
+            JsonObject respuesta = new JsonObject(); 
+            respuesta.addProperty("nombreVideo", nombreVideo);
+            return respuesta;
 
         });
-
+        
         post("/crearCuestionario", (req, res) -> {
             String json = req.body();
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
@@ -89,13 +96,13 @@ public class App {
             respuesta.addProperty("status", dao.createPregunta(cuestionario));
             return respuesta;
         });
-
+        
         get("/listaPreguntas", (req, res) -> {
             before((req2, res2) -> res.type("application/json"));
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             return gson.toJson(dao.listaPreguntas());
         });
-
+        
         post("/guardarRespuesta", (req, res) -> {
             // Insertamos un nuevo usuario
             String json = req.body();
@@ -110,7 +117,7 @@ public class App {
             //respuesta.addProperty("id", id);
             return respuesta;
         });        
-
+        
     }
 
     // methods used for logging
