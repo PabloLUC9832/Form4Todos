@@ -93,15 +93,18 @@ public class CuestionarioDAO_Imp {
 
     }
 
-    public List<Cuestionario> listaPreguntas() {
+    //public List<Cuestionario> listaPreguntas() {
+    public List<Cuestionario> listaPreguntas(Cuestionario cuestionario) {
+
         Statement stm = null;
         ResultSet rs = null;
         Connection conn = null;
         List<Cuestionario> resultado = new ArrayList<>(); 
-
+        String nombreCuestionario = cuestionario.getNombreCuestionario();      
         conn = conexion.getConnection();
         try {
-            String sql = "SELECT * FROM `examen sistemas`";
+            //String sql = "SELECT * FROM `examen sistemas`";
+            String sql = "SELECT * FROM `"+nombreCuestionario+"`";
             stm = conn.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()){
@@ -146,8 +149,8 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql = "UPDATE `examen sistemas` SET alumno = ? , respuesta = ?, respuestaVideo= ? WHERE id = ?;";
-            //String sql = "UPDATE "+nombreCuestionario+" SET alumno = ? , respuesta = ? WHERE id = ?;";
+            //String sql = "UPDATE `examen sistemas` SET alumno = ? , respuesta = ?, respuestaVideo= ? WHERE id = ?;";
+            String sql = "UPDATE `"+nombreCuestionario+"` SET alumno = ? , respuesta = ? WHERE id = ?;";
             prestm = conn.prepareStatement(sql);            
             prestm.setString(1, cuestionario.getAlumno());            
             prestm.setString(2, cuestionario.getRespuesta());                        

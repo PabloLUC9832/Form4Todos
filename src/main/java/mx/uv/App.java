@@ -99,11 +99,22 @@ public class App {
             respuesta.addProperty("status", dao.createPregunta(cuestionario));
             return respuesta;
         });
-        
+        /*
         get("/listaPreguntas", (req, res) -> {
             before((req2, res2) -> res.type("application/json"));
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             return gson.toJson(dao.listaPreguntas());
+        });*/
+
+        post("/listaPreguntas", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            String json = req.body();            
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            //JsonObject respuesta = new JsonObject();
+            //respuesta.addProperty("status", dao.listaPreguntas(cuestionario));
+
+            return gson.toJson(dao.listaPreguntas(cuestionario));
         });
         
         post("/guardarRespuesta", (req, res) -> {
@@ -128,6 +139,8 @@ public class App {
         });
 
         
+
+
     }
 
     // methods used for logging

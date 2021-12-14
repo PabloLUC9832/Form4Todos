@@ -2,10 +2,13 @@ var btnEnviarCuestionario = document.getElementById("btnEnviarCuestionario");
 var btnVer = document.getElementById("btnVer");
 var blob ;
 var rutaVideo="";
-/*
-var grabar = document.getElementById("grabar")
-grabar.addEventListener("click", GRABAR)
-var detener = document.getElementById("detener")
+var tituloCuestionario = document.getElementById("tituloCuestionario");
+tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
+/*var grabar = document.getElementById("grabar")
+grabar.addEventListener("click", ()=>{
+  console.log(localStorage.getItem("nombreCuest"))
+})*/
+/*var detener = document.getElementById("detener")
 detener.addEventListener("click", DETENER)*/
 
 
@@ -112,8 +115,14 @@ navigator.mediaDevices.getUserMedia({
     })
   }
 
-btnVer.addEventListener("click", function () {
-    axios.get("http://localhost:4567/listaPreguntas")
+//btnVer.addEventListener("click", function () {
+  btnVer.addEventListener("click",()=>{
+    //nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
+    axios.post("http://localhost:4567/listaPreguntas",{
+      nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
+    })
+
+    //axios.get("http://localhost:4567/listaPreguntas")
     .then(function (res) {
         let json = res.data;
         let listaTareas = document.getElementById("preguntas");
@@ -151,6 +160,7 @@ btnVer.addEventListener("click", function () {
                     //enviar(blob)
                     console.log(rutaVideo)
                     axios.post("http://localhost:4567/guardarRespuesta",{
+                        nombreCuestionario : tituloCuestionario.textContent = localStorage.getItem("nombreCuest"),
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
                         respuesta : resp.value
@@ -178,24 +188,4 @@ btnVer.addEventListener("click", function () {
     .catch(function (error) {
         console.log(error)
     })
-})
-
-var btnMostrar = document.getElementById("btnMostrar");
-btnMostrar.addEventListener("click", function () {
-    axios.get("http://localhost:4567/listaCuestionarios")
-    .then(function (res) {
-        let json = res.data;
-        let listaTareas = document.getElementById("cuestionarios");
-        for (var clave in json) {
-            // Controlando que json realmente tenga esa propiedad
-            if (json.hasOwnProperty(clave)) {
-                // Mostrando en pantalla la clave junto a su valor
-                // alert("La clave es " + clave + " y el valor es " + json[clave]);
-                let tarea = document.createElement("li");
-                tarea.textContent = json[clave].nombre;
-                listaTareas.appendChild(tarea);
-            }
-        }
-    })
-    .catch()
 })
