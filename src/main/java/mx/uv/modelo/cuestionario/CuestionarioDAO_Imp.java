@@ -151,8 +151,7 @@ public class CuestionarioDAO_Imp {
             prestm = conn.prepareStatement(sql);            
             prestm.setString(1, cuestionario.getAlumno());            
             prestm.setString(2, cuestionario.getRespuesta());                        
-            prestm.setBytes(3,cuestionario.getRespuestaVideo());
-            prestm.setInt(4,cuestionario.getId());
+            prestm.setInt(3,cuestionario.getId());
                         
             if (prestm.executeUpdate() >0) 
                 msj = "Respuesta guardada";
