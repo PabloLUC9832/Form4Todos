@@ -13,12 +13,7 @@ public class Cuestionario {
         this.id=id;
         this.pregunta=pregunta;
     }
-    //VistaAlumno1
-    public Cuestionario(String alumno, String respuesta){
-        this.alumno=alumno;
-        this.respuesta=respuesta;
-    }
-    //VistaAlumno2
+    //VistaAlumno
     public Cuestionario(String alumno, String respuesta){
         this.alumno=alumno;
         this.respuesta=respuesta;
