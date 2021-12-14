@@ -2,7 +2,7 @@ var btnEnviarCuestionario = document.getElementById("btnEnviarCuestionario");
 var btnVer = document.getElementById("btnVer");
 var blob ;
 var rutaVideo="";
-/*var grabar = document.getElementById("grabar")
+var grabar = document.getElementById("grabar")
 grabar.addEventListener("click", GRABAR)
 var detener = document.getElementById("detener")
 detener.addEventListener("click", DETENER)*/
@@ -100,7 +100,7 @@ navigator.mediaDevices.getUserMedia({
     formData.append("videoGrabado", stream)
     axios.post("http://localhost:4567/", formData, {
       headers : {
-        "Content-Type" : "multipart/form-data"
+         "Content-Type" : "multipart/form-data"
       }
     })
     .then(function (res){
