@@ -24,7 +24,6 @@ btnPreguntas.addEventListener("click", () => {
         alummo:"",
         pregunta: document.getElementById("pregunta1").value,
         respuesta:"",
-        respuestaVideo:[]
     })
         .then(function (res) {
             alert("Status:" + res.data.status);

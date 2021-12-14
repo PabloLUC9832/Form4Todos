@@ -8,7 +8,6 @@ public class Cuestionario {
     private String alumno;
     private String pregunta;
     private String respuesta;
-    private byte[] respuestaVideo;
     //VistaProfesor
     public Cuestionario(int id, String pregunta){
         this.id=id;
@@ -20,10 +19,9 @@ public class Cuestionario {
         this.respuesta=respuesta;
     }
     //VistaAlumno2
-    public Cuestionario(String alumno, String respuesta,byte[] respuestaVideo){
+    public Cuestionario(String alumno, String respuesta){
         this.alumno=alumno;
         this.respuesta=respuesta;
-        this.respuestaVideo=respuestaVideo;
     }
 
     public int getId() {
@@ -58,12 +56,6 @@ public class Cuestionario {
         this.nombreCuestionario = nombreCuestionario;
     }
 
-    public byte[] getRespuestaVideo() {
-        return respuestaVideo;
-    }
-    public void setRespuestaVideo(byte[] respuestaVideo) {
-        this.respuestaVideo = respuestaVideo;
-    }
     @Override
     public String toString() {
         return "Cuestionario [alumno=" + alumno + ", id=" + id + ", pregunta=" + pregunta + ", respuesta=" + respuesta

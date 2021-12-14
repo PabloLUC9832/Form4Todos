@@ -21,4 +21,6 @@ btnCrearCuestionario.addEventListener("click", () => {
         })
 });
 
-
+function habilitarBAP() {
+    document.getElementById("btn-abrir-popup").disabled = false;
+}

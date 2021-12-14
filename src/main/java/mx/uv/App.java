@@ -14,6 +14,7 @@ import java.nio.file.*;
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.*;
 import com.google.gson.*;
+import mx.uv.modelo.Tabla.TablaDAO_Imp;
 
 import mx.uv.modelo.cuestionario.Cuestionario;
 import mx.uv.modelo.cuestionario.CuestionarioDAO_Imp;
@@ -119,6 +120,13 @@ public class App {
             //respuesta.addProperty("id", id);
             return respuesta;
         });        
+
+        get("/listaCuestionarios", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            TablaDAO_Imp dao = new TablaDAO_Imp();
+            return gson.toJson(dao.listaCuestionarios());
+        });
+
         
     }
 

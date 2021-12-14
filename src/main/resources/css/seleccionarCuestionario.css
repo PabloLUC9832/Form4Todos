@@ -1,0 +1,114 @@
+body {
+    background-color: lightsalmon;
+    
+}
+
+div{
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: lightseagreen;
+    padding-left: 30px;
+}
+
+
+
+input[type=text], select {
+    width: 72%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(54, 204, 112);
+    border-radius: 7px;
+	box-sizing: border-box;
+    /*margin: 30px 0;*/
+    margin-left: 100px;
+    margin-bottom: 10px;
+    /*background-color: khaki;*/
+    background-color: lightyellow;
+}
+
+.btn-warning {
+    /*background-color: #4CAF50; /* Green */
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+    
+}
+
+
+
+#tabla {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 140px;
+    
+}
+
+#tabla td, #tabla th {
+    border: 4px solid lightsalmon;
+    padding: 7px;
+    border-radius: 20px;
+}
+
+#tabla tr:nth-child(2n){background-color: lightgreen;}
+#tabla tr:nth-child(odd) {background-color: mediumaquamarine;}
+/*#tabla td:nth-child(even){background-color: #f2f2f2;}*/
+/*#tabla th:nth-child(even){background-color: #f2f2f2;}*/
+
+#tabla tr:hover {background-color: #ddd;}
+
+#tabla th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #3f9b79;
+  color: white;
+}
+
+.btn-danger {
+    border: none;
+    color: rgb(244, 247, 246);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 570px;
+}
+
+
+  
+ul {
+    text-align: center;
+    background: lightcoral;
+    padding: 20px;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-left: 500px;
+    margin-right: 500px;
+    border-radius: 10px;
+}
+  
+ 
+  
+ul li {
+    text-align: center;
+    background: lavenderblush;
+    margin: 5px;
+    color: lightcoral;
+    border-radius: 30px;
+}
+
+li:hover {background-color: darkmagenta;}

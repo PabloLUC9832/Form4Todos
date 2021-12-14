@@ -2,6 +2,7 @@ var btnEnviarCuestionario = document.getElementById("btnEnviarCuestionario");
 var btnVer = document.getElementById("btnVer");
 var blob ;
 var rutaVideo="";
+/*
 var grabar = document.getElementById("grabar")
 grabar.addEventListener("click", GRABAR)
 var detener = document.getElementById("detener")
@@ -152,9 +153,8 @@ btnVer.addEventListener("click", function () {
                     axios.post("http://localhost:4567/guardarRespuesta",{
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
-                        //respuesta : resp.value,
-                        respuesta : rutaVideo,
-                        respuestaVideo: [1]
+                        respuesta : resp.value
+                        //respuesta : rutaVideo,
                     })
                     .then(function(res){
                         alert("Status: "+ res.data.status);
@@ -178,4 +178,24 @@ btnVer.addEventListener("click", function () {
     .catch(function (error) {
         console.log(error)
     })
+})
+
+var btnMostrar = document.getElementById("btnMostrar");
+btnMostrar.addEventListener("click", function () {
+    axios.get("http://localhost:4567/listaCuestionarios")
+    .then(function (res) {
+        let json = res.data;
+        let listaTareas = document.getElementById("cuestionarios");
+        for (var clave in json) {
+            // Controlando que json realmente tenga esa propiedad
+            if (json.hasOwnProperty(clave)) {
+                // Mostrando en pantalla la clave junto a su valor
+                // alert("La clave es " + clave + " y el valor es " + json[clave]);
+                let tarea = document.createElement("li");
+                tarea.textContent = json[clave].nombre;
+                listaTareas.appendChild(tarea);
+            }
+        }
+    })
+    .catch()
 })

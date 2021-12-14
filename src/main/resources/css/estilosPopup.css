@@ -5,9 +5,87 @@
 }
 
 body {
-	background: #fff;
+	background-color: lightblue;
 	font-family: 'Open Sans', sans-serif;
 }
+
+h1 {
+    color: white;
+    font-family: arial;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+    color: green;
+}
+
+p {
+    font-family: verdana;
+    font-size: 14;
+    color: navy;
+    text-align: center;
+}
+
+.btn-success {
+    /*background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.btn-info {
+    border: none;
+    color: rgb(2, 2, 2);
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.btn-block {
+	display: block;
+	border: none;
+	color: white;
+	padding: 7px 32px;
+	text-align: center;
+	font-size: 30px;
+	width: 80.5%;
+	margin-top: 30px;
+	margin-left: 100px;
+}
+
+input[type=text], select {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(42, 132, 148);
+    border-radius: 7px;
+	box-sizing: border-box;
+    /*margin: 30px 0;*/
+    margin-left: 100px;
+}
+  
+label {
+    cursor: default;
+    text-align: left;
+    margin-left: 92px;
+}
+div{
+    text-align:left;
+    padding: 70px;
+}
+
+/*Jair*/
 
 .contenedor {
 	width: 90%;
@@ -29,7 +107,7 @@ body {
 	margin-bottom: 20px;
 }
 
-.contenedor article .btn-abrir-popup {
+.contenedor article .btn btn-success btn-lg btn-block {
 	padding: 0 20px;
 	margin-bottom: 20px;
 	height: 40px;
@@ -45,7 +123,7 @@ body {
 	cursor: pointer;
 }
 
-.contenedor article .btn-abrir-popup:hover {
+.contenedor article .btn btn-success btn-lg btn-block:hover {
 	background: rgba(94,125,227, .9);
 }
 
@@ -78,7 +156,6 @@ body {
 	padding: 20px;
 	text-align: center;
 	width: 600px;
-	
 	transition: .3s ease all;
 	transform: scale(0.7);
 	opacity: 0;
@@ -97,6 +174,11 @@ body {
 	color: #000;
 }
 
+.popup label{
+	text-align: center;
+	margin-left: -40px;
+}
+
 .popup h3 {
 	font-size: 36px;
 	font-weight: 600;
@@ -109,6 +191,8 @@ body {
 	font-weight: 300;
 	margin-bottom: 40px;
 	opacity: 0;
+	margin-left: 70px;
+	text-align: center;
 }
 
 .popup form .contenedor-inputs {
@@ -123,6 +207,8 @@ body {
 	line-height: 52px;
 	text-align: center;
 	border: 1px solid #BBBBBB;
+	margin-left: 12px;
+	margin: 7px 0;
 }
 
 .popup form .btn-submit {
