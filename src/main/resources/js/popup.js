@@ -18,7 +18,7 @@ btnCerrarPopup.addEventListener('click', function(e){
 document.getElementById("nombreCuestionarioExistente").innerHTML = document.getElementById("nombreCuestionario").value
 
 btnPreguntas.addEventListener("click", () => {
-    axios.post("http://localhost:4567/crearPregunta", {
+    axios.post("https://forms4todos.herokuapp.com/crearPregunta", {
         nombreCuestionario : document.getElementById("nombreCuestionario").value,
         id : 0,
         alummo:"",

@@ -56,6 +56,10 @@ div{
   width: 100%;
   margin-top: 30px;
 }
+
+a {
+  text-decoration: none;
+}
     
 label {
   cursor: default;

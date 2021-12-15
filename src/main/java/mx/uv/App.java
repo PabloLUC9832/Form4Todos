@@ -4,17 +4,19 @@ import static spark.Spark.*;
 import spark.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.xml.stream.Location;
+
 import java.io.*;
 import java.nio.file.*;
-import spark.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.nio.file.*;
-import static spark.Spark.*;
-import static spark.debug.DebugScreen.*;
 import com.google.gson.*;
 import mx.uv.modelo.Tabla.TablaDAO_Imp;
+
+import spark.ModelAndView;
+import spark.template.velocity.VelocityTemplateEngine;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import mx.uv.modelo.cuestionario.Cuestionario;
 import mx.uv.modelo.cuestionario.CuestionarioDAO_Imp;
@@ -24,6 +26,9 @@ public class App {
     private static Gson gson = new Gson();
 
     public static void main(String[] args) {
+
+        port(getHerokuAssignedPort());
+        staticFiles.location("/");
 
         File uploadDir = new File("upload");
         uploadDir.mkdir(); // create the upload directory if it doesn't exist
@@ -45,13 +50,6 @@ public class App {
         });
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
-
-        get("/", (req, res) ->
-                  "<form method='post' enctype='multipart/form-data'>" // note the enctype
-                + "    <input type='file' name='videoGrabado' accept='.png'>" // make sure to call getPart using the same "name" in the post
-                + "    <button>Upload picture</button>"
-                + "</form>"
-        );
 
         post("/", (req, res) -> {
 
@@ -158,7 +156,51 @@ public class App {
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             return gson.toJson(dao.listaCuestionariosHechos(cuestionario));
+        });
+
+        //USO DE VELOCITY
+
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/index.html"));
+        });
+
+        get("/calificarCuestionario", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/calificarCuestionario.html"));
+        });         
+
+        get("/crearCuestionario", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/crearCuestionario.html"));
+        });
+
+        get("/responderCuestionario", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/responderCuestionario.html"));
+        });        
+
+        get("/seleccionarCuestionario", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/seleccionarCuestionario.html"));
         }); 
+
+        get("/seleccionarCuestionarioCalificacion", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/seleccionarCuestionarioCalificacion.html"));
+        }); 
+
+        get("/seleccionarCuestionarioProfesor", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/seleccionarCuestionarioProfesor.html"));
+        }); 
+
+
+        get("/visualizarCalificaciones", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "vista/visualizarCalificaciones.html"));
+        });         
+
 
     }
 
@@ -175,5 +217,13 @@ public class App {
         }
         return null;
     }
-    
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
+            
 }
