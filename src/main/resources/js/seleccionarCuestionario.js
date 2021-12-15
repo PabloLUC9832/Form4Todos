@@ -6,7 +6,7 @@ var cuestionarioRealizar =  document.getElementById("cuestionarioRealizar").valu
 localStorage.setItem("nombreCuest",document.getElementById("cuestionarioRealizar").value)
 
 btnMostrar.addEventListener("click", function () {
-    axios.get("https://forms4todos.herokuapp.com/listaCuestionarios")
+    axios.get("http://localhost:4567/listaCuestionarios")
     .then(function (res) {
         let json = res.data;
         let listaTareas = document.getElementById("cuestionarios");
@@ -28,8 +28,8 @@ btnMostrar.addEventListener("click", function () {
 btnResponder.addEventListener("click",()=>{
     console.log(cuestionarioRealizar.value)
     localStorage.setItem("nombreCuest",document.getElementById("cuestionarioRealizar").value)
-    window.location.href='/responderCuestionario'
-    axios.post("https://forms4todos.herokuapp.com/listaPreguntas",{
+    window.location.href='responderCuestionario.html'
+    axios.post("http://localhost:4567/listaPreguntas",{
         nombreCuestionario: document.getElementById("cuestionarioRealizar").value
     })
     .then(function(res){
@@ -43,7 +43,7 @@ btnEliminar.addEventListener("click", ()=> {
     console.log(cuestionarioRealizar.value)
     localStorage.setItem("nombreCuest", document.getElementById("cuestionarioRealizar").value)
     //window.location.href='responderCuestionario.html'
-    axios.post("https://forms4todos.herokuapp.com/listaPreguntas", {
+    axios.post("http://localhost:4567/listaPreguntas", {
         nombreCuestionario: document.getElementById("cuestionarioRealizar").value
     })
     .then(function(error) {
@@ -52,6 +52,5 @@ btnEliminar.addEventListener("click", ()=> {
         console.log(error);
     })
 })
-
 
 

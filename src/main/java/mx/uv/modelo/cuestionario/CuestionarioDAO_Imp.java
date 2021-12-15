@@ -21,7 +21,7 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();        
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql1 = "CREATE TABLE `proyectosw_e4`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL,`calificacion` VARCHAR(255) NULL  , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+            String sql1 = "CREATE TABLE `proyectosw`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL,`calificacion` VARCHAR(255) NULL  , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
             prestm = conn.prepareStatement(sql1);
             prestm.execute();
         } catch (Exception e) {
@@ -297,56 +297,56 @@ public class CuestionarioDAO_Imp {
         
     }
     
-    //VER TODOS LOS DATOS DE LOS EXAMENES, VISUALIZAR TODO EL CUESTIONARIO
-    public List<Cuestionario> listaCuestionariosHechos(Cuestionario cuestionario) {
+//VER TODOS LOS DATOS DE LOS EXAMENES, VISUALIZAR TODO EL CUESTIONARIO
+public List<Cuestionario> listaCuestionariosHechos(Cuestionario cuestionario) {
 
-        Statement stm = null;
-        ResultSet rs = null;
-        Connection conn = null;
-        List<Cuestionario> resultado = new ArrayList<>(); 
-        String nombreCuestionario = cuestionario.getNombreCuestionario();
-        String msj = "";      
-        conn = conexion.getConnection();
+    Statement stm = null;
+    ResultSet rs = null;
+    Connection conn = null;
+    List<Cuestionario> resultado = new ArrayList<>(); 
+    String nombreCuestionario = cuestionario.getNombreCuestionario();
+    String msj = "";      
+    conn = conexion.getConnection();
 
-        try {
-            String sql = "SELECT * FROM `"+nombreCuestionario+"`";
-            stm = conn.createStatement();
-            rs = stm.executeQuery(sql);
-            while (rs.next()){
-                Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"), rs.getString("calificacion"));
-                resultado.add(u);
-            }
-            if (stm.executeUpdate(sql) >0) 
-                msj = "Éxito al mostrar el cuestionario";
-            else
-                msj = "Error al mostrar el cuestionrio"; 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            if (stm != null){
-                try {
-                    stm.close();
-                } catch (SQLException e) {
-                    stm = null;
-                    e.printStackTrace();
-                }
-            }
-            if (rs != null){
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    rs = null;
-                    e.printStackTrace();
-                }
-            }
+    try {
+        String sql = "SELECT * FROM `"+nombreCuestionario+"`";
+        stm = conn.createStatement();
+        rs = stm.executeQuery(sql);
+        while (rs.next()){
+            Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"), rs.getString("calificacion"));
+            resultado.add(u);
+        }
+        if (stm.executeUpdate(sql) >0) 
+            msj = "Éxito al mostrar el cuestionario";
+        else
+            msj = "Error al mostrar el cuestionrio"; 
+    } catch (Exception e) {
+        e.printStackTrace();
+    }finally {
+        if (stm != null){
             try {
-                conn.close();
+                stm.close();
             } catch (SQLException e) {
+                stm = null;
                 e.printStackTrace();
             }
         }
-        return resultado;
+        if (rs != null){
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                rs = null;
+                e.printStackTrace();
+            }
+        }
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+    return resultado;
+}
 
 
 

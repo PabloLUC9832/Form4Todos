@@ -89,7 +89,7 @@ navigator.mediaDevices.getUserMedia({
   function enviar(stream) {
     var formData = new FormData();
     formData.append("videoGrabado", stream)
-    axios.post("https://forms4todos.herokuapp.com/", formData, {
+    axios.post("http://localhost:4567/", formData, {
       headers : {
          "Content-Type" : "multipart/form-data"
       }
@@ -104,7 +104,7 @@ navigator.mediaDevices.getUserMedia({
   }
 
   btnVer.addEventListener("click",()=>{
-    axios.post("https://forms4todos.herokuapp.com/listaPreguntas",{
+    axios.post("http://localhost:4567/listaPreguntas",{
       nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
     })
     .then(function (res) {
@@ -133,7 +133,6 @@ navigator.mediaDevices.getUserMedia({
                 resp.setAttribute("class", "inputRespuesta");
                 resp.setAttribute("placeholder","Ingresa la respuesta");
                 btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");
-               
        
                 var a =  "respuesta"+clave
                 resp.setAttribute("id",a)
@@ -147,9 +146,9 @@ navigator.mediaDevices.getUserMedia({
                 btnEnviar.addEventListener("click",() => {
                     console.log(id.innerText)
                     //enviar(blob)
-                    console.log(rutaVideo)                    
-                    resp.innerHTML = "hola"+rutaVideo;
-                    axios.post("https://forms4todos.herokuapp.com/guardarRespuesta",{
+                    console.log(rutaVideo)
+                    resp.textContent = rutaVideo
+                    axios.post("http://localhost:4567/guardarRespuesta",{
                         nombreCuestionario : tituloCuestionario.textContent = localStorage.getItem("nombreCuest"),
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
@@ -158,7 +157,7 @@ navigator.mediaDevices.getUserMedia({
                     .then(function(res){
                         alert("Status: "+ res.data.status);
                         //enviar(blob)
-                        window.location.href='/'
+                        window.location.href='index.html'
                     })
                     .catch(function (error) {
                         console.log(error)

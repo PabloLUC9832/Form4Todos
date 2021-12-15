@@ -3,7 +3,7 @@ var tituloCuestionario = document.getElementById("tituloCuestionario");
 tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
 
 btnVer.addEventListener("click",()=>{
-    axios.post("https://forms4todos.herokuapp.com/listaCuestionariosCalificacion2",{
+    axios.post("http://localhost:4567/listaCuestionariosCalificacion2",{
       nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
     })
     .then(function (res) {
@@ -58,5 +58,4 @@ btnVer.addEventListener("click",()=>{
         console.log(error)
     })
 })
-
 
