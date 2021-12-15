@@ -134,6 +134,41 @@ public class CuestionarioDAO_Imp {
         return resultado;
     }
 
+    //ELIMINAR CUESTIONARIO
+    public String eliminarCuestionario(Cuestionario cuestionario){
+
+        Connection conn = null;
+        PreparedStatement prestm0  = null;
+        String msj = "";
+        conn = conexion.getConnection();        
+        String nombreCuestionario = cuestionario.getNombreCuestionario();      
+        try {
+            String sql0 = "DROP TABLE `" +nombreCuestionario+"`";
+            prestm0 = conn.prepareStatement(sql0);            
+            if (prestm0.execute()){
+                msj="Cuestionario eliminado";
+            }else{
+                msj="Error al eliminar el cuestionario";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (prestm0 != null){
+                try {
+                    prestm0.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return msj;        
+    }
+
     //USAMOS PARA CALIFICAR LOS EXAMENES
     public List<Cuestionario> listaPreguntasParaCalificar(Cuestionario cuestionario) {
 
@@ -261,4 +296,58 @@ public class CuestionarioDAO_Imp {
         return msj;        
         
     }
+    
+    //VER TODOS LOS DATOS DE LOS EXAMENES, VISUALIZAR TODO EL CUESTIONARIO
+    public List<Cuestionario> listaCuestionariosHechos(Cuestionario cuestionario) {
+
+        Statement stm = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        List<Cuestionario> resultado = new ArrayList<>(); 
+        String nombreCuestionario = cuestionario.getNombreCuestionario();
+        String msj = "";      
+        conn = conexion.getConnection();
+
+        try {
+            String sql = "SELECT * FROM `"+nombreCuestionario+"`";
+            stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()){
+                Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"), rs.getString("calificacion"));
+                resultado.add(u);
+            }
+            if (stm.executeUpdate(sql) >0) 
+                msj = "Éxito al mostrar el cuestionario";
+            else
+                msj = "Error al mostrar el cuestionrio"; 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (stm != null){
+                try {
+                    stm.close();
+                } catch (SQLException e) {
+                    stm = null;
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    rs = null;
+                    e.printStackTrace();
+                }
+            }
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultado;
+    }
+
+
+
 }

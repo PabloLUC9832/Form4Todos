@@ -131,6 +131,7 @@ navigator.mediaDevices.getUserMedia({
                 id.setAttribute("class", "labelId");
                 Pr.setAttribute("class", "labelRepuesta");
                 resp.setAttribute("class", "inputRespuesta");
+                resp.setAttribute("placeholder","Ingresa la respuesta");
                 btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");
        
                 var a =  "respuesta"+clave
@@ -167,8 +168,7 @@ navigator.mediaDevices.getUserMedia({
                 listaTareas.appendChild(resp);
                 listaTareas.appendChild(btnGrabar);
                 listaTareas.appendChild(btnDetener);
-                listaTareas.appendChild(salto);
-                listaTareas.appendChild(salto);
+                listaTareas.appendChild(salto);                
                 listaTareas.appendChild(btnEnviar);
                 listaTareas.appendChild(salto);
             }

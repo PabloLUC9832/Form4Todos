@@ -11,7 +11,16 @@ div{
     padding-left: 30px;
 }
 
-
+.div2{
+    text-align: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: lightsalmon;
+    padding-left: 3px;
+    align-items: left;
+    margin-right: 10px;
+    
+}
 
 input[type=text], select {
     width: 72%;
@@ -21,7 +30,7 @@ input[type=text], select {
     border: 1px solid rgb(54, 204, 112);
     border-radius: 7px;
 	box-sizing: border-box;
-    margin-left: 100px;
+    margin-left: 20px;
     margin-bottom: 10px;
     background-color: lightyellow;
 }
@@ -78,8 +87,22 @@ input[type=text], select {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin-top: 18px;
+    margin-left: 0px;
+    margin-bottom: 22px;
+}
+
+.btn2 {
+    border: none;
+    color: rgb(244, 247, 246);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     margin-top: 20px;
-    margin-left: 570px;
+    margin-left: 20px;
+    border-radius: 4px;
 }
 
 ul {

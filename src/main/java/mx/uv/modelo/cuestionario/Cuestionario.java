@@ -16,6 +16,15 @@ public class Cuestionario {
         this.pregunta=pregunta;
     }
 
+    //VistaCalificacion
+    public Cuestionario(int id, String alumno, String pregunta, String respuesta, String calificacion){
+        this.id=id;
+        this.alumno=alumno;
+        this.pregunta=pregunta;
+        this.respuesta=respuesta;
+        this.calificacion=calificacion;
+    }
+
     //VistaProfesor
     public Cuestionario(int id, String alumno, String pregunta, String respuesta){
         this.id=id;

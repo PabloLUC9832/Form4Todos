@@ -113,8 +113,17 @@ public class App {
             before((req2, res2) -> res.type("application/json"));
             TablaDAO_Imp dao = new TablaDAO_Imp();
             return gson.toJson(dao.listaCuestionarios());
-        });        
+        });
 
+        //ELIMINAR CUESTIONARIO
+        post("/eliminarCuestionario", (req, res) -> {
+            String json = req.body();
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status", dao.eliminarCuestionario(cuestionario));
+            return respuesta;
+        });
         //CALIFICAR EXAMENES
 
         post("/guardarCalificacion", (req, res) -> {
@@ -124,8 +133,9 @@ public class App {
             JsonObject respuesta = new JsonObject();
             respuesta.addProperty("status", dao.calificarPregunta(cuestionario));
             return respuesta;
-        });         
+        });
 
+        //
         post("/listaPreguntasProfesor2", (req, res) -> {
             before((req2, res2) -> res.type("application/json"));
             String json = req.body();            
@@ -133,6 +143,22 @@ public class App {
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             return gson.toJson(dao.listaPreguntasParaCalificar(cuestionario));
         });
+        //VER LOS EXAMENES
+        post("/listaCuestionariosCalificacion", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            String json = req.body();            
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            return gson.toJson(dao.listaCuestionariosHechos(cuestionario));
+        });      
+        
+        post("/listaCuestionariosCalificacion2", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            String json = req.body();            
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            return gson.toJson(dao.listaCuestionariosHechos(cuestionario));
+        }); 
 
     }
 

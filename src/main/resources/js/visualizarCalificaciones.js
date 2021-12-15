@@ -3,61 +3,56 @@ var tituloCuestionario = document.getElementById("tituloCuestionario");
 tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
 
 btnVer.addEventListener("click",()=>{
-    axios.post("http://localhost:4567/listaPreguntasProfesor2",{
+    axios.post("http://localhost:4567/listaCuestionariosCalificacion2",{
       nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
     })
     .then(function (res) {
         let json = res.data;
         let listaTareas = document.getElementById("preguntas");
-        let btnEnviar = document.createElement("button");
-        btnEnviar.setAttribute("type","button")
+
+        let al = document.createElement("h6");
+        
         for (var clave in json) {
             if (json.hasOwnProperty(clave)) {
                 let id = document.createElement("label");
                 let Pr = document.createElement("label");
                 let resp = document.createElement("label");
-                let calif = document.createElement("input")
-
-                id.setAttribute("class", "labelId");
+                let calif = document.createElement("label")
+                //let alum = document.createElement("label");
+                let msj = document.createElement("label");
+                /*id.setAttribute("class", "labelId");
                 Pr.setAttribute("class", "labelRepuesta");
                 resp.setAttribute("class", "labelRepuesta");
-                calif.setAttribute("placeholder","Ingresa la calificación");
                 calif.setAttribute("class","inputRespuesta");
-                btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");
-       
-                var a =  "calificacion"+clave
-                calif.setAttribute("id",a)
+                btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");*/
+
                 let salto = document.createElement("br");
                 id.textContent = json[clave].id;
                 Pr.textContent = json[clave].pregunta;
                 resp.textContent = json[clave].respuesta;
-                btnEnviar.textContent = "Enviar respuesta";
+                calif.textContent = json[clave].calificacion;
+                //alum.textContent = json[clave].alumno;
+                al.textContent = json[1].alumno;
+                msj.textContent = "Tu puntaje:";
                 
-                btnEnviar.addEventListener("click",() => {
-                    console.log(resp.innerText)
-                    axios.post("http://localhost:4567/guardarCalificacion",{
-                        nombreCuestionario : tituloCuestionario.textContent = localStorage.getItem("nombreCuest"),
-                        id: id.innerText,
-                        calificacion : calif.value
-                    })
-                    .then(function(res){
-                        alert("Status: "+ res.data.status);
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })
-                })
                 
                 listaTareas.appendChild(id);
+                                                
                 listaTareas.appendChild(Pr);
                 listaTareas.appendChild(resp);
+                listaTareas.appendChild(salto);
+                listaTareas.appendChild(msj);                
                 listaTareas.appendChild(calif);
                 listaTareas.appendChild(salto);
                 listaTareas.appendChild(salto);
-                listaTareas.appendChild(btnEnviar);
-                listaTareas.appendChild(salto);
             }
-        }   
+        } 
+        let salto2 = document.createElement("br");
+        listaTareas.appendChild(salto2);
+        let nn = document.createElement("h6");
+        nn.textContent = "Nombre del alumno";
+        listaTareas.appendChild(nn); 
+        listaTareas.appendChild(al);  
     })
     .catch(function (error) {
         console.log(error)

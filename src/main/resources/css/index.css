@@ -99,5 +99,17 @@ h2 {
   text-align: center;
   font-size: 40px;
 }
+
+.btn-block3 {
+  display: block;
+  border: none;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+  margin-top: 30px;
+  background-color: RebeccaPurple;
+}
     
     

@@ -1,5 +1,6 @@
 var btnMostrar = document.getElementById("btnMostrar");
 var btnResponder =  document.getElementById("btnResponder");
+var btnEliminar =  document.getElementById("btnEliminar");
 var cuestionarioRealizar =  document.getElementById("cuestionarioRealizar").value;
 
 localStorage.setItem("nombreCuest",document.getElementById("cuestionarioRealizar").value)
@@ -32,6 +33,20 @@ btnResponder.addEventListener("click",()=>{
         nombreCuestionario: document.getElementById("cuestionarioRealizar").value
     })
     .then(function(res){
+    })
+    .catch(function(error){
+        consoloe.log(error);
+    })
+})
+
+btnEliminar.addEventListener("click",()=>{
+    console.log(cuestionarioRealizar.value)
+    localStorage.setItem("nombreCuest",document.getElementById("cuestionarioRealizar").value)
+    axios.post("http://localhost:4567/eliminarCuestionario",{
+        nombreCuestionario: document.getElementById("cuestionarioRealizar").value
+    })
+    .then(function(res){
+        alert(res.data.status);
     })
     .catch(function(error){
         consoloe.log(error);
