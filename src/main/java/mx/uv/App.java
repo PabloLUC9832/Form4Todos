@@ -67,7 +67,7 @@ public class App {
             respuesta.addProperty("nombreVideo", nombreVideo);
             return respuesta;
         });
-        
+        //CREAR TABLA 
         post("/crearCuestionario", (req, res) -> {
             String json = req.body();
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
@@ -76,7 +76,7 @@ public class App {
             respuesta.addProperty("status", dao.createCuestionario(cuestionario));
             return respuesta;
         });
-        
+        //CREAR PREGUNTAS CON EL POP UP
         post("/crearPregunta", (req, res) -> {
             String json = req.body();
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
@@ -85,7 +85,7 @@ public class App {
             respuesta.addProperty("status", dao.createPregunta(cuestionario));
             return respuesta;
         });
-      
+        //SE USAN PARA CONTESTAR EL EXAMEN
         post("/listaPreguntas", (req, res) -> {
             before((req2, res2) -> res.type("application/json"));
             String json = req.body();            
@@ -93,7 +93,7 @@ public class App {
             CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
             return gson.toJson(dao.listaPreguntas(cuestionario));
         });
-        
+                
         post("/guardarRespuesta", (req, res) -> {
             String json = req.body();
             Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
@@ -102,12 +102,38 @@ public class App {
             respuesta.addProperty("status", dao.modificarRespuesta(cuestionario));
             return respuesta;
         });        
-
+        //MOSTRAR TABLAS
         get("/listaCuestionarios", (req, res) -> {
             before((req2, res2) -> res.type("application/json"));
             TablaDAO_Imp dao = new TablaDAO_Imp();
             return gson.toJson(dao.listaCuestionarios());
         });
+
+        get("/listaCuestionariosProfesor", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            TablaDAO_Imp dao = new TablaDAO_Imp();
+            return gson.toJson(dao.listaCuestionarios());
+        });        
+
+        //CALIFICAR EXAMENES
+
+        post("/guardarCalificacion", (req, res) -> {
+            String json = req.body();
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status", dao.calificarPregunta(cuestionario));
+            return respuesta;
+        });         
+
+        post("/listaPreguntasProfesor2", (req, res) -> {
+            before((req2, res2) -> res.type("application/json"));
+            String json = req.body();            
+            Cuestionario cuestionario = gson.fromJson(json, Cuestionario.class);
+            CuestionarioDAO_Imp dao = new CuestionarioDAO_Imp();
+            return gson.toJson(dao.listaPreguntasParaCalificar(cuestionario));
+        });
+
     }
 
     // methods used for logging

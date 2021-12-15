@@ -1,4 +1,3 @@
-var btnEnviarCuestionario = document.getElementById("btnEnviarCuestionario");
 var btnVer = document.getElementById("btnVer");
 var blob ;
 var rutaVideo="";
@@ -139,13 +138,9 @@ navigator.mediaDevices.getUserMedia({
                 let salto = document.createElement("br");
                 id.textContent = json[clave].id;
                 Pr.textContent = json[clave].pregunta;
-                //res.textContent = ""+ json[clave].respuesta;
-
                 btnGrabar.textContent = "Grabar respuesta";
                 btnDetener.textContent = "Detener grabación";
-
                 btnEnviar.textContent = "Enviar respuesta";
-
 
                 btnEnviar.addEventListener("click",() => {
                     console.log(id.innerText)
@@ -166,6 +161,7 @@ navigator.mediaDevices.getUserMedia({
                         console.log(error)
                     })
                 })
+                
                 listaTareas.appendChild(id);
                 listaTareas.appendChild(Pr);
                 listaTareas.appendChild(resp);
@@ -175,7 +171,6 @@ navigator.mediaDevices.getUserMedia({
                 listaTareas.appendChild(salto);
                 listaTareas.appendChild(btnEnviar);
                 listaTareas.appendChild(salto);
-                
             }
         }   
     })

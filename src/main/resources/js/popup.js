@@ -24,6 +24,7 @@ btnPreguntas.addEventListener("click", () => {
         alummo:"",
         pregunta: document.getElementById("pregunta1").value,
         respuesta:"",
+        calificacion:"",
     })
     .then(function (res) {
         document.getElementById("pregunta1").value = "";

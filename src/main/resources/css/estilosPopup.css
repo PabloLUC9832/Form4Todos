@@ -9,13 +9,13 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
+/*h1 {
     color: white;
     font-family: arial;
     text-align: center;
-}
+}*/
 
-p {
+h1 {
     font-family: verdana;
     font-size: 14;
     color: navy;
