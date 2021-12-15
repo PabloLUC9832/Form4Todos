@@ -21,15 +21,25 @@ input[type=text], select {
     border: 1px solid rgb(54, 204, 112);
     border-radius: 7px;
 	box-sizing: border-box;
-    /*margin: 30px 0;*/
     margin-left: 100px;
     margin-bottom: 10px;
-    /*background-color: khaki;*/
     background-color: lightyellow;
 }
 
+/*.divL2 {
+	text-align: center;
+	align-items: center;
+}
+
+.label3 {
+    cursor: default;
+    text-align: center;
+	color: red;
+	font-size: 24px;
+	margin-left: 20px;
+}*/
+
 .btn-warning {
-    /*background-color: #4CAF50; /* Green */
     border: none;
     color: rgb(0, 0, 0);
     padding: 10px 40px;
@@ -42,6 +52,7 @@ input[type=text], select {
 }
 
 
+/*Tabla*/
 
 #tabla {
     font-family: Arial, Helvetica, sans-serif;
@@ -61,8 +72,6 @@ input[type=text], select {
 
 #tabla tr:nth-child(2n){background-color: lightgreen;}
 #tabla tr:nth-child(odd) {background-color: mediumaquamarine;}
-/*#tabla td:nth-child(even){background-color: #f2f2f2;}*/
-/*#tabla th:nth-child(even){background-color: #f2f2f2;}*/
 
 #tabla tr:hover {background-color: #ddd;}
 
@@ -86,8 +95,6 @@ input[type=text], select {
     margin-left: 570px;
 }
 
-
-  
 ul {
     text-align: center;
     background: lightcoral;
@@ -100,9 +107,7 @@ ul {
     margin-right: 500px;
     border-radius: 10px;
 }
-  
- 
-  
+
 ul li {
     text-align: center;
     background: lavenderblush;

@@ -1,79 +1,79 @@
 body {
-    background-color: lavender;
-  }
+  background-color: lavender;
+}
   
-  div{
-      text-align:center;
-      padding: 70px;
-  }
+div{
+  text-align:center;
+  padding: 70px;
+}
   
-  .btn-block {
-      display: block;
-      border: none;
-      color: white;
-      padding: 7px;
-      text-align: center;
-      font-size: 30px;
-      width: 100%;
-      margin-top: 30px;
-  }
+.btn-block {
+  display: block;
+  border: none;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+  margin-top: 30px;
+}
   
-  label {
-    cursor: default;
-  }
+label {
+  cursor: default;
+}
   
-  h1 {
-    color: rgb(0, 0, 0);
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 30px;
-  }
+h1 {
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 30px;
+}
   
-  .btn-block2 {
-    border: none;
-    color: slateblue;
-    padding: 7px 300px; 
-    text-align: center;
-    font-size: 40px;
-  }
+.btn-block2 {
+  border: none;
+  color: slateblue;
+  padding: 7px 300px; 
+  text-align: center;
+  font-size: 40px;
+}
   
-  body {
-      background-color: lavender;
-    }
+body {
+  background-color: lavender;
+}
     
-    div{
-        text-align:center;
-        padding: 70px;
-    }
+div{
+  text-align:center;
+  padding: 70px;
+}
     
-    .btn-block {
-        display: block;
-        border: none;
-        color: white;
-        padding: 7px;
-        text-align: center;
-        font-size: 30px;
-        width: 100%;
-        margin-top: 30px;
-    }
+.btn-block {
+  display: block;
+  border: none;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+  margin-top: 30px;
+}
     
-    label {
-      cursor: default;
-    }
+label {
+  cursor: default;
+}
     
-    h1 {
-      color: rgb(0, 0, 0);
-      text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
-      padding: 30px;
-    }
+h1 {
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 30px;
+}
     
-    .btn-block2 {
-      border: none;
-      color: slateblue;
-      padding: 7px 300px; 
-      text-align: center;
-      font-size: 40px;
-    }
+.btn-block2 {
+  border: none;
+  color: slateblue;
+  padding: 7px 300px; 
+  text-align: center;
+  font-size: 40px;
+}
     
     

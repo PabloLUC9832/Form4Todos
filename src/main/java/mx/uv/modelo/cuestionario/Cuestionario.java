@@ -8,6 +8,7 @@ public class Cuestionario {
     private String alumno;
     private String pregunta;
     private String respuesta;
+    
     //VistaProfesor
     public Cuestionario(int id, String pregunta){
         this.id=id;
@@ -55,8 +56,5 @@ public class Cuestionario {
     public String toString() {
         return "Cuestionario [alumno=" + alumno + ", id=" + id + ", pregunta=" + pregunta + ", respuesta=" + respuesta
                 + "]";
-    }
-
-    
-    
+    }   
 }

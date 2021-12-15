@@ -25,10 +25,12 @@ btnPreguntas.addEventListener("click", () => {
         pregunta: document.getElementById("pregunta1").value,
         respuesta:"",
     })
-        .then(function (res) {
-            alert("Status:" + res.data.status);
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+    .then(function (res) {
+        document.getElementById("pregunta1").value = "";
+        document.getElementById("mensaje").textContent = ""+res.data.status; 
+        console.log("Status:" + res.data.status);
+    })
+    .catch(function (error) {        
+        console.log(error)
+    })
 });

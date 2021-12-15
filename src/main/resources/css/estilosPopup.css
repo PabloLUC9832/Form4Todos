@@ -17,19 +17,12 @@ h1 {
 
 p {
     font-family: verdana;
-    font-size: 20px;
-    color: green;
-}
-
-p {
-    font-family: verdana;
     font-size: 14;
     color: navy;
     text-align: center;
 }
 
 .btn-success {
-    /*background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     padding: 10px 40px;
@@ -84,7 +77,6 @@ input[type=text], select {
     border: 1px solid rgb(42, 132, 148);
     border-radius: 7px;
 	box-sizing: border-box;
-    /*margin: 30px 0;*/
     margin-left: 100px;
 }
   
@@ -93,12 +85,28 @@ label {
     text-align: left;
     margin-left: 92px;
 }
+
+
+.divL {
+	text-align: center;
+	align-items: center;
+}
+
+.label2 {
+    cursor: default;
+    text-align: center;
+	color: red;
+	font-size: 24px;
+	margin-left: 20px;
+}
+
 div{
     text-align:left;
     padding: 70px;
 }
 
-/*Jair*/
+
+/*Contenedor*/
 
 .contenedor {
 	width: 90%;
@@ -139,6 +147,7 @@ div{
 .contenedor article .btn btn-success btn-lg btn-block:hover {
 	background: rgba(94,125,227, .9);
 }
+
 
 /* ------------------------- */
 /* POPUP */
@@ -242,9 +251,11 @@ div{
 	background: rgba(94,125,227, .9);
 }
 
+
 /* ------------------------- */
 /* ANIMACIONES */
 /* ------------------------- */
+
 .popup.active {	transform: scale(1); opacity: 1; }
 .popup.active h3 { animation: entradaTitulo .8s ease .5s forwards; }
 .popup.active h4 { animation: entradaSubtitulo .8s ease .5s forwards; }

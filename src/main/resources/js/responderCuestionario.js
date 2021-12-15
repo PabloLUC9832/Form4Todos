@@ -4,13 +4,6 @@ var blob ;
 var rutaVideo="";
 var tituloCuestionario = document.getElementById("tituloCuestionario");
 tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
-/*var grabar = document.getElementById("grabar")
-grabar.addEventListener("click", ()=>{
-  console.log(localStorage.getItem("nombreCuest"))
-})*/
-/*var detener = document.getElementById("detener")
-detener.addEventListener("click", DETENER)*/
-
 
 var chunks = [];
 var mediaRecorder;
@@ -73,7 +66,6 @@ navigator.mediaDevices.getUserMedia({
   }
 
   mediaRecorder.ondataavailable = function(e) {
-    //enviar(e.data)
     chunks.push(e.data);
     enviar(e.data)
   }
@@ -87,16 +79,12 @@ navigator.mediaDevices.getUserMedia({
     mediaRecorder.start();
     console.log(mediaRecorder.state);
     console.log("recorder started");
-    // record.style.background = "red";
-    // record.style.color = "black";
   }
   
   function DETENER(params) {
     mediaRecorder.stop();
     console.log(mediaRecorder.state);
     console.log("recorder stopped");
-    // record.style.background = "";
-    // record.style.color = "";
   }
   
   function enviar(stream) {
@@ -108,6 +96,7 @@ navigator.mediaDevices.getUserMedia({
       }
     })
     .then(function (res){
+      ruta =  res.data.nobreVi;
       alert("Ruta: "+res.data.nombreVideo);
     })
     .catch(function (error) {
@@ -115,22 +104,18 @@ navigator.mediaDevices.getUserMedia({
     })
   }
 
-//btnVer.addEventListener("click", function () {
   btnVer.addEventListener("click",()=>{
-    //nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
     axios.post("http://localhost:4567/listaPreguntas",{
       nombreCuestionario: tituloCuestionario.textContent = localStorage.getItem("nombreCuest")
     })
-
-    //axios.get("http://localhost:4567/listaPreguntas")
     .then(function (res) {
         let json = res.data;
         let listaTareas = document.getElementById("preguntas");
         let btnEnviar = document.createElement("button");
         btnEnviar.setAttribute("type","button")
         for (var clave in json) {
-            //var contadorDetener = "detener"+clave;
-            //var contadorGrabar = "grabar"+clave;
+            var contadorDetener = "detener"+clave;
+            var contadorGrabar = "grabar"+clave;
             if (json.hasOwnProperty(clave)) {
                 let id = document.createElement("label");
                 let Pr = document.createElement("label");
@@ -138,16 +123,23 @@ navigator.mediaDevices.getUserMedia({
                 let btnGrabar = document.createElement("button");
                 btnGrabar.setAttribute("type","button");
                 btnGrabar.addEventListener("click",GRABAR)
+                btnGrabar.setAttribute("class","btn-lightGrabarRespuesta");
                 let btnDetener = document.createElement("button");
                 btnDetener.setAttribute("type","button");
                 btnDetener.addEventListener("click",DETENER)
+                btnDetener.setAttribute("class", "btn-lightDetenerGrabacion");
+
+                id.setAttribute("class", "labelId");
+                Pr.setAttribute("class", "labelRepuesta");
+                resp.setAttribute("class", "inputRespuesta");
+                btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");
        
                 var a =  "respuesta"+clave
                 resp.setAttribute("id",a)
                 let salto = document.createElement("br");
                 id.textContent = json[clave].id;
                 Pr.textContent = json[clave].pregunta;
-                res.textContent = ""+ json[clave].respuesta;
+                //res.textContent = ""+ json[clave].respuesta;
 
                 btnGrabar.textContent = "Grabar respuesta";
                 btnDetener.textContent = "Detener grabación";
@@ -159,12 +151,12 @@ navigator.mediaDevices.getUserMedia({
                     console.log(id.innerText)
                     //enviar(blob)
                     console.log(rutaVideo)
+                    resp.textContent = rutaVideo
                     axios.post("http://localhost:4567/guardarRespuesta",{
                         nombreCuestionario : tituloCuestionario.textContent = localStorage.getItem("nombreCuest"),
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
                         respuesta : resp.value
-                        //respuesta : rutaVideo,
                     })
                     .then(function(res){
                         alert("Status: "+ res.data.status);
@@ -179,6 +171,8 @@ navigator.mediaDevices.getUserMedia({
                 listaTareas.appendChild(resp);
                 listaTareas.appendChild(btnGrabar);
                 listaTareas.appendChild(btnDetener);
+                listaTareas.appendChild(salto);
+                listaTareas.appendChild(salto);
                 listaTareas.appendChild(btnEnviar);
                 listaTareas.appendChild(salto);
                 
