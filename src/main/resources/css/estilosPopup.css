@@ -51,6 +51,19 @@ p {
     margin-left: 20px;
 }
 
+.btn-grey {
+	border: none;
+    color: rgb(255, 255, 255);
+    padding: 2px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-left: 441px;
+	margin-top: 70px;
+	background-color: DarkSlateGray;
+}
+
 .btn-block {
 	display: block;
 	border: none;

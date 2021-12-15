@@ -1,0 +1,184 @@
+body {
+    background-color: rgb(166, 206, 181);
+    
+}
+
+/*div{
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: lightseagreen;
+    padding-left: 30px;
+}*/
+
+h3 {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 320px;
+}
+
+.div1 {
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: lightseagreen;
+    padding-left: 300px;
+    justify-content: center;
+}
+
+.div2 {
+    text-align: center;
+    justify-content: center;
+    background-color: darkturquoise;
+}
+
+input, select {
+    width: 35%;
+    padding: 7px 4px;
+    margin: 8px 0;
+    color: white; 
+    display: inline-block;
+    border: 1.5px solid rgb(143, 139, 139);
+    border-radius: 7px;
+	box-sizing: border-box;
+    /*margin: 30px 0;*/
+    margin-left: 100px;
+    margin-bottom: 10px;
+    /*background-color: khaki;*/
+    background-color: rgb(231, 198, 189);
+}
+
+/*.btn-warning {
+    /*background-color: #4CAF50; /* Green 
+    color: rgb(0, 0, 0);
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+    
+}*/
+
+.btn-light {
+    border: 0.5px solid black;
+    color: rgb(0, 0, 0);
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    
+}
+
+.btn-lightGrabar {
+    border: 0.5px solid black;
+    color: rgb(0, 0, 0);
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 200px;
+    background-color: white;
+}
+
+
+video {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/*.btn-light2 {
+    border: 0.5px solid black;
+    color: rgb(0, 0, 0);
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+}*/
+
+.btn-success {
+    border: 0.5px solid rgb(252, 252, 252);
+    color: rgb(255, 255, 255);
+    padding: 5.5px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+}
+label {
+    cursor: default;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.inputRespuesta {
+    width: 35%;
+    padding: 4px 20px;
+    margin: 8px 0;
+    color: rgb(0, 0, 0); 
+    display: inline-block;
+    border: 1.5px solid rgb(48, 137, 189);
+    border-radius: 7px;
+	box-sizing: border-box;
+    /*margin: 30px 0;*/
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    /*background-color: khaki;*/
+    background-color: rgb(148, 223, 182);
+}
+
+.inputRespuesta:focus {
+    border: 3px solid rgb(48, 137, 189);
+}
+
+.btn-lightGrabarRespuesta {
+    border: 1px solid rgb(12, 71, 110);
+    color: rgb(12, 71, 110);
+    padding: 5px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+    border-radius: 7px;
+    background-color: aliceblue;
+    font-weight: 700;
+}
+
+.btn-lightDetenerGrabacion {
+    border: 1px solid rgb(110, 23, 12);
+    color: rgb(110, 12, 28);
+    padding: 5px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+    border-radius: 7px;
+    background-color: LavenderBlush;
+    font-weight: 700;
+}
+
+.labelRepuesta {
+    cursor: default;
+    text-align: left;
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+
+.labelId {
+    cursor: default;
+    text-align: left;
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
