@@ -9,6 +9,7 @@ public class Cuestionario {
     private String pregunta;
     private String respuesta;
     private String calificacion;
+    private String rutaVideo;
     
     //VistaAlumno
     public Cuestionario(int id, String pregunta){
@@ -17,20 +18,22 @@ public class Cuestionario {
     }
 
     //VistaCalificacion
-    public Cuestionario(int id, String alumno, String pregunta, String respuesta, String calificacion){
+    public Cuestionario(int id, String alumno, String pregunta, String respuesta, String rutaVideo, String calificacion){
         this.id=id;
         this.alumno=alumno;
         this.pregunta=pregunta;
         this.respuesta=respuesta;
+        this.rutaVideo=rutaVideo;
         this.calificacion=calificacion;
     }
 
     //VistaProfesor
-    public Cuestionario(int id, String alumno, String pregunta, String respuesta){
+    public Cuestionario(int id, String alumno, String pregunta, String respuesta, String rutaVideo){
         this.id=id;
         this.alumno=alumno;
         this.pregunta=pregunta;
         this.respuesta=respuesta;
+        this.rutaVideo=rutaVideo;
     }
 
     public int getId() {
@@ -73,6 +76,13 @@ public class Cuestionario {
     }
     public void setNombreCuestionario(String nombreCuestionario) {
         this.nombreCuestionario = nombreCuestionario;
+    }
+
+    public String getRutaVideo() {
+        return rutaVideo;
+    }
+    public void setRutaVideo(String rutaVideo) {
+        this.rutaVideo = rutaVideo;
     }
 
     @Override

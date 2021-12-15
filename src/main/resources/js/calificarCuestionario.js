@@ -16,11 +16,14 @@ btnVer.addEventListener("click",()=>{
                 let id = document.createElement("label");
                 let Pr = document.createElement("label");
                 let resp = document.createElement("label");
+                let video = document.createElement("video");
                 let calif = document.createElement("input")
 
                 id.setAttribute("class", "labelId");
                 Pr.setAttribute("class", "labelRepuesta");
                 resp.setAttribute("class", "labelRepuesta");
+                video.setAttribute("controls",'');
+                
                 calif.setAttribute("placeholder","Ingresa la calificación");
                 calif.setAttribute("class","inputRespuesta");
                 btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");
@@ -31,6 +34,8 @@ btnVer.addEventListener("click",()=>{
                 id.textContent = json[clave].id;
                 Pr.textContent = json[clave].pregunta;
                 resp.textContent = json[clave].respuesta;
+                video.width="150";
+                video.setAttribute("src", json[clave].rutaVideo);
                 btnEnviar.textContent = "Enviar calificacion";
                 
                 btnEnviar.addEventListener("click",() => {
@@ -52,6 +57,7 @@ btnVer.addEventListener("click",()=>{
                 listaTareas.appendChild(id);
                 listaTareas.appendChild(Pr);
                 listaTareas.appendChild(resp);
+                listaTareas.appendChild(video);
                 listaTareas.appendChild(calif);
                 listaTareas.appendChild(salto);
                 listaTareas.appendChild(salto);

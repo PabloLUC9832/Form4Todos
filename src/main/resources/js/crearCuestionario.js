@@ -14,7 +14,6 @@ btnCrearCuestionario.addEventListener("click", () => {
         calificacion:""
     })
     .then(function (res) {
-        //alert("Status:" + res.data.status);
         document.getElementById("mensaje2").textContent = ""+res.data.status; 
         console.log("Status:" + res.data.status);        
     })

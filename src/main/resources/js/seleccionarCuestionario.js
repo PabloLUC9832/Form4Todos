@@ -42,7 +42,6 @@ btnResponder.addEventListener("click",()=>{
 btnEliminar.addEventListener("click", ()=> {
     console.log(cuestionarioRealizar.value)
     localStorage.setItem("nombreCuest", document.getElementById("cuestionarioRealizar").value)
-    //window.location.href='responderCuestionario.html'
     axios.post("https://forms4todos.herokuapp.com/listaPreguntas", {
         nombreCuestionario: document.getElementById("cuestionarioRealizar").value
     })

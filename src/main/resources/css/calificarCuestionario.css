@@ -3,13 +3,6 @@ body {
     
 }
 
-/*h3 {
-    color: black;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-right: 320px;
-}*/
-
 .h1 {
     color: black;
     text-align: center;
@@ -86,6 +79,8 @@ video {
     display: inline-block;
     font-size: 16px;
     margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 label {
     cursor: default;
@@ -168,4 +163,23 @@ label {
     margin-left: 20px;
     color: rgb(0, 0, 0);
     font-size: 18px;
+}
+
+.divCalificacion {
+    text-align: center;
+    justify-content: center;
+    background-color: cadetblue;
+}
+
+h6 {
+    text-align: center;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+form {
+    margin-top: 10px;
+    margin-left: 4px;
+    padding-top: 2px;
 }

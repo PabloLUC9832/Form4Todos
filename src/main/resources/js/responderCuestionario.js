@@ -8,7 +8,7 @@ var chunks = [];
 var mediaRecorder;
 
 navigator.mediaDevices.getUserMedia({
-  audio: false, video: true
+  audio: true, video: true
 }).then(function (x) {
    //usar el flujo de datos
   console.log(x)
@@ -95,7 +95,8 @@ navigator.mediaDevices.getUserMedia({
       }
     })
     .then(function (res){
-      ruta =  res.data.nobreVi;
+      ruta =  res.data.nombreVideo;
+      document.getElementById("rutaP").innerHTML = "Pega la siguiente ruta en el campo que le corresponde: "+ruta;      
       alert("Ruta: "+res.data.nombreVideo);
     })
     .catch(function (error) {
@@ -113,13 +114,13 @@ navigator.mediaDevices.getUserMedia({
         let btnEnviar = document.createElement("button");
         btnEnviar.setAttribute("type","button")
         for (var clave in json) {
-            var contadorDetener = "detener"+clave;
-            var contadorGrabar = "grabar"+clave;
             if (json.hasOwnProperty(clave)) {
                 let id = document.createElement("label");
                 let Pr = document.createElement("label");
                 let resp = document.createElement("input");
+                let respV = document.createElement("input");
                 let btnGrabar = document.createElement("button");
+
                 btnGrabar.setAttribute("type","button");
                 btnGrabar.addEventListener("click",GRABAR)
                 btnGrabar.setAttribute("class","btn-lightGrabarRespuesta");
@@ -132,11 +133,15 @@ navigator.mediaDevices.getUserMedia({
                 Pr.setAttribute("class", "labelRepuesta");
                 resp.setAttribute("class", "inputRespuesta");
                 resp.setAttribute("placeholder","Ingresa la respuesta");
+                respV.setAttribute("placeholder","Pega el enlace aquí");
                 btnEnviar.setAttribute("class", "btn-lightEnviarRespuesta");
-               
-       
+                
                 var a =  "respuesta"+clave
                 resp.setAttribute("id",a)
+
+                var b =  "respuestaV"+clave
+                respV.setAttribute("id",b)                
+
                 let salto = document.createElement("br");
                 id.textContent = json[clave].id;
                 Pr.textContent = json[clave].pregunta;
@@ -146,18 +151,16 @@ navigator.mediaDevices.getUserMedia({
 
                 btnEnviar.addEventListener("click",() => {
                     console.log(id.innerText)
-                    //enviar(blob)
-                    console.log(rutaVideo)                    
-                    resp.innerHTML = "hola"+rutaVideo;
+                    console.log(rutaVideo)
                     axios.post("https://forms4todos.herokuapp.com/guardarRespuesta",{
                         nombreCuestionario : tituloCuestionario.textContent = localStorage.getItem("nombreCuest"),
                         id: id.innerText,
                         alumno : document.getElementById("alumno").value ,
-                        respuesta : resp.value
+                        respuesta : resp.value ,
+                        rutaVideo : respV.value
                     })
                     .then(function(res){
                         alert("Status: "+ res.data.status);
-                        //enviar(blob)
                         window.location.href='/'
                     })
                     .catch(function (error) {
@@ -168,10 +171,12 @@ navigator.mediaDevices.getUserMedia({
                 listaTareas.appendChild(id);
                 listaTareas.appendChild(Pr);
                 listaTareas.appendChild(resp);
+                listaTareas.appendChild(respV);
                 listaTareas.appendChild(btnGrabar);
                 listaTareas.appendChild(btnDetener);
                 listaTareas.appendChild(salto);                
                 listaTareas.appendChild(btnEnviar);
+                listaTareas.appendChild(respV);
                 listaTareas.appendChild(salto);
             }
         }   

@@ -21,7 +21,7 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();        
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql1 = "CREATE TABLE `proyectosw_e4`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL,`calificacion` VARCHAR(255) NULL  , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+            String sql1 = "CREATE TABLE `proyectosw_e4`.`"+nombreCuestionario+"`"+"( `id` INT(11) NOT NULL AUTO_INCREMENT, `alumno` VARCHAR(50) NULL , `pregunta` VARCHAR(255) NULL , `respuesta` VARCHAR(255) NULL,`rutaVideo` VARCHAR(255) NULL,`calificacion` VARCHAR(255) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
             prestm = conn.prepareStatement(sql1);
             prestm.execute();
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class CuestionarioDAO_Imp {
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
             String sql0 = "SELECT 1 FROM `" +nombreCuestionario+"` LIMIT 1";
-            String sql2 = "INSERT INTO `"+nombreCuestionario+"` (id,alumno,pregunta,respuesta,calificacion) VALUES (?,?,?,?,?)";
+            String sql2 = "INSERT INTO `"+nombreCuestionario+"` (id,alumno,pregunta,respuesta,calificacion,rutaVideo) VALUES (?,?,?,?,?,?)";
             prestm0 = conn.prepareStatement(sql0);
             prestm2 = conn.prepareStatement(sql2);
             if (prestm0.execute() == true){
@@ -62,6 +62,7 @@ public class CuestionarioDAO_Imp {
                 prestm2.setString(3, cuestionario.getPregunta()); 
                 prestm2.setString(4, cuestionario.getRespuesta());
                 prestm2.setString(5, cuestionario.getCalificacion());
+                prestm2.setString(6, cuestionario.getRutaVideo());                
                 prestm2.executeUpdate();
             }
         } catch (Exception e) {
@@ -146,9 +147,9 @@ public class CuestionarioDAO_Imp {
             String sql0 = "DROP TABLE `" +nombreCuestionario+"`";
             prestm0 = conn.prepareStatement(sql0);            
             if (prestm0.execute()){
-                msj="Cuestionario eliminado";
-            }else{
                 msj="Error al eliminar el cuestionario";
+            }else{
+                msj="Cuestionario eliminado";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,7 +186,7 @@ public class CuestionarioDAO_Imp {
             stm = conn.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()){
-                Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"));
+                Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"),rs.getString("rutaVideo"));
                 resultado.add(u);
             }
             if (stm.executeUpdate(sql) >0) 
@@ -230,11 +231,12 @@ public class CuestionarioDAO_Imp {
         conn = conexion.getConnection();
         String nombreCuestionario = cuestionario.getNombreCuestionario();      
         try {
-            String sql = "UPDATE `"+nombreCuestionario+"` SET alumno = ? , respuesta = ? WHERE id = ?;";
+            String sql = "UPDATE `"+nombreCuestionario+"` SET alumno = ? , respuesta = ? , rutaVideo= ? WHERE id = ?;";
             prestm = conn.prepareStatement(sql);            
             prestm.setString(1, cuestionario.getAlumno());            
-            prestm.setString(2, cuestionario.getRespuesta());                        
-            prestm.setInt(3,cuestionario.getId());
+            prestm.setString(2, cuestionario.getRespuesta());
+            prestm.setString(3, cuestionario.getRutaVideo());                        
+            prestm.setInt(4,cuestionario.getId());
             if (prestm.executeUpdate() >0) 
                 msj = "Respuesta guardada";
             else
@@ -313,7 +315,7 @@ public class CuestionarioDAO_Imp {
             stm = conn.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()){
-                Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"), rs.getString("calificacion"));
+                Cuestionario u = new Cuestionario(rs.getInt("id"),rs.getString("alumno"), rs.getString("pregunta"), rs.getString("respuesta"),rs.getString("rutaVideo") ,rs.getString("calificacion"));
                 resultado.add(u);
             }
             if (stm.executeUpdate(sql) >0) 
